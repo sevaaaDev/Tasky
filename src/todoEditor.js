@@ -12,3 +12,7 @@ export function editTodo(container, projectID, todoID, name, description, dueDat
   container.project[projectID].todo[todoID].dueDate = dueDate
   container.project[projectID].todo[todoID].priority = priority
 }
+
+export function removeTodo(container, projectID, todoID) {
+  delete container.project[projectID].todo[todoID]
+}
