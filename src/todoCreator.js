@@ -8,12 +8,11 @@ function createID() {
 
 export function createProject(container,name) {
   let project = {
-    todo:{},
+    todo: [],
     name,
-    id: createID()
   }
 
-  container[project.id] = project
+  container.push(project)
 }
 
 export function createTodo(container, projectID, name, description, dueDate, priority) {
@@ -26,5 +25,5 @@ export function createTodo(container, projectID, name, description, dueDate, pri
     id: createID()
   }
 
-  container[projectID].todo[todo.id] = todo
+  container[projectID].todo.push(todo)
 }
