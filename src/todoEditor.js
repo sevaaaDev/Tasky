@@ -1,18 +1,18 @@
 export function checklist(container, projectID, todoID) {
-  if (container.project[projectID].todo[todoID].checklist === true) {
-    container.project[projectID].todo[todoID].checklist = false
+  if (container[projectID][todoID].checklist === true) {
+    container[projectID][todoID].checklist = false
     return
   }
-  container.project[projectID].todo[todoID].checklist = true
+  container[projectID][todoID].checklist = true
 }
 
 export function editTodo(container, projectID, todoID, name, description, dueDate, priority) {
-  container.project[projectID].todo[todoID].name = name
-  container.project[projectID].todo[todoID].description = description
-  container.project[projectID].todo[todoID].dueDate = dueDate
-  container.project[projectID].todo[todoID].priority = priority
+  container[projectID][todoID].name = name
+  container[projectID][todoID].description = description
+  container[projectID][todoID].dueDate = dueDate
+  container[projectID][todoID].priority = priority
 }
 
 export function removeTodo(container, projectID, todoID) {
-  delete container.project[projectID].todo[todoID]
+  delete container[projectID][todoID]
 }

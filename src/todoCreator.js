@@ -15,7 +15,7 @@ export function createProject(container,name) {
     id: createID()
   }
 
-  container.project[project.id] = project
+  container[project.id] = project
 }
 
 export function createTodo(container, projectID, name, description, dueDate, priority) {
@@ -28,5 +28,5 @@ export function createTodo(container, projectID, name, description, dueDate, pri
     id: createID()
   }
 
-  container.project[projectID].todo[todo.id] = todo
+  container[projectID][todo.id] = todo
 }
