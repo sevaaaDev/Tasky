@@ -1,18 +1,22 @@
 export function displayTodoToDOM(container, projectID) {
   resetDisplay()
-  const content = document.querySelector('.content')
-  for (let todo in container.project[projectID].todo) {
+  const projectDOM = document.querySelector('.content')
+  for (let todo in container[projectID]) {
     const list = document.createElement('ul')
-    for (let prop in container.project[projectID].todo[todo]) {
+    for (let prop in container[projectID][todo]) {
       const li = document.createElement('li')
-      li.innerText = `${prop} : ${container.project[projectID].todo[todo][prop]}`
+      li.innerText = `${prop} : ${container[projectID][todo][prop]}`
       list.append(li)
     }
-    content.append(list)
+    projectDOM.append(list)
   }
 }
 
 function resetDisplay() {
   const content = document.querySelector('.content')
   content.innerHTML = ''
+}
+
+export function selectDOM(selector) {
+  return document.querySelector(selector)
 }
