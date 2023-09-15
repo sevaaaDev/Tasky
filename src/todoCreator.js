@@ -1,7 +1,5 @@
 export default class Container {
-  constructor() {
-    this.project = {}
-  }
+  
 }
 
 function createID() {
@@ -28,5 +26,5 @@ export function createTodo(container, projectID, name, description, dueDate, pri
     id: createID()
   }
 
-  container[projectID][todo.id] = todo
+  container[projectID].todo[todo.id] = todo
 }
