@@ -1,11 +1,3 @@
-export default class Container {
-  
-}
-
-function createID() {
-  return Math.floor(Math.random() * 100000)
-}
-
 export function createProject(container,name) {
   let project = {
     todo: [],
@@ -15,15 +7,14 @@ export function createProject(container,name) {
   container.push(project)
 }
 
-export function createTodo(container, projectID, name, description, dueDate, priority) {
+export function createTodo(container, projectIndex, name, description, dueDate, priority) {
   let todo = {
     name,
     description,
     dueDate,
     priority,
     checklist: false,
-    id: createID()
   }
 
-  container[projectID].todo.push(todo)
+  container[projectIndex].todo.push(todo)
 }
