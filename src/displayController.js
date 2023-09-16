@@ -2,11 +2,12 @@ export function displayTodoToDOM(container, projectIndex) {
   resetTodoDisplay();
   const todoContainer = document.querySelector(".todo-container");
   todoContainer.classList.add("todo-container");
-  for (let todo in container[projectIndex].todo) {
+  for (let todo of container[projectIndex].todo) {
     const list = document.createElement("ul");
-    for (let prop in container[projectIndex].todo[todo]) {
+    for (let prop in todo) {
       const li = document.createElement("li");
-      li.innerText = `${prop} : ${container[projectIndex].todo[todo][prop]}`;
+      list.setAttribute("data-id", container[projectIndex].todo.indexOf(todo));
+      li.innerText = `${prop} : ${todo[prop]}`;
       list.append(li);
     }
     todoContainer.append(list);
