@@ -1,18 +1,18 @@
-export function checklist(container, projectID, todoID) {
-  if (container[projectID][todoID].checklist === true) {
-    container[projectID][todoID].checklist = false
+export function checklist(container, projectIndex, todoIndex) {
+  if (container[projectIndex].todo[todoIndex].checklist === true) {
+    container[projectIndex].todo[todoIndex].checklist = false
     return
   }
-  container[projectID][todoID].checklist = true
+  container[projectIndex].todo[todoIndex].checklist = true
 }
 
-export function editTodo(container, projectID, todoID, name, description, dueDate, priority) {
-  container[projectID][todoID].name = name
-  container[projectID][todoID].description = description
-  container[projectID][todoID].dueDate = dueDate
-  container[projectID][todoID].priority = priority
+export function editTodo(container, projectIndex, todoIndex, name, description, dueDate, priority) {
+  container[projectIndex].todo[todoIndex].name = name
+  container[projectIndex].todo[todoIndex].description = description
+  container[projectIndex].todo[todoIndex].dueDate = dueDate
+  container[projectIndex].todo[todoIndex].priority = priority
 }
 
-export function removeTodo(container, projectID, todoID) {
-  delete container[projectID][todoID]
+export function removeTodo(container, projectIndex, todoIndex) {
+  container[projectIndex].todo.splice(todoIndex, 1)
 }
