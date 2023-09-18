@@ -49,7 +49,7 @@ header {
   background-color: var(--primary-clr);
 }
 
-.header-wrapper {
+.header--wrapper {
   display: flex;
   align-items: center;
   width: 90%;
@@ -65,14 +65,13 @@ nav {
   padding: 1rem;
   border: 1px solid black;
   background-color: var(--tertiary-clr);
-  display: none;
 }
 
-nav .nav-task-container {
+nav .nav--filter-container {
   margin: 0 0 1rem;
 }
 
-nav .nav-task-container div {
+nav .nav--filter-container div {
   padding: 0.3rem;
   margin: 0.1rem;
   font-size: 1.1rem;
@@ -86,13 +85,13 @@ nav h3 {
   font-size: 1.5rem;
 }
 
-nav .nav-project-container div {
+nav .nav--project-container div {
   padding: 0.3rem;
   margin: 0.1rem;
   font-size: 1.1rem;
 }
 
-nav .nav-project-container .add-project {
+nav .nav--add-project-container .button--add-project {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -109,13 +108,13 @@ main h2 {
   margin: auto;
   padding: 0.5rem 0;
 }
-main .task-container,
-main .add-task-container {
+main .main--task-container,
+main .main--add-task-container {
   width: 90%;
   margin: auto;
 }
 
-main .task-container div.task {
+main .main--task-container div.task {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -124,30 +123,30 @@ main .task-container div.task {
   border: 1px solid black;
 }
 
-main .task-container div.task p {
+main .main--task-container div.task p {
   margin-right: auto;
 }
 
-main .add-task-container .add-task {
+main .main--add-task-container .button--add-task {
   display: flex;
   padding: 0.5rem;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
 }
-main .add-task-container .add-task.invisible {
+main .main--add-task-container .button--add-task__invisible {
   display: none;
 }
 
-main .add-task-container .add-task-form {
+main .main--add-task-container .form--add-task {
   border: 1px solid black;
   padding: 1rem 2rem;
 }
-main .add-task-container .add-task-form.invisible {
+main .main--add-task-container .form--add-task__invisible {
   display: none;
 }
 
-main .add-task-container .add-task-form label {
+main .main--add-task-container .form--add-task label {
   display: block;
 }
 

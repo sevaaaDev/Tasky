@@ -4,30 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script src="main.js" defer></script> -->
+    <script src="feather.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Todo List</title>
   </head>
   <body>
     <header>
-      <h1>Tasky</h1>
+      <div class="header--wrapper">
+        <h1>Tasky</h1>
+        <i data-feather="menu"></i>
+      </div>
     </header>
     <nav>
-      <div class="nav-task-container">
-        <div>All Tasks</div>
-        <div>Today</div>
-        <div>Next 7 Days</div>
+      <div class="nav--filter-container">
+        <div class="button--all-tasks"><i data-feather="home"></i> All Tasks</div>
+        <div class="button--today-tasks"><i data-feather="calendar"></i>Today</div>
+        <div class="button--thisweek-task"><i data-feather="calendar"></i>Next 7 Days</div>
       </div>
       <h3>Projects</h3>
-      <div class="nav-project-container">
-        <div>Add Project</div>
+      <div class="nav--project-container">
+      </div>
+      <div class="nav--add-project-container">
+        <div class="button--add-project">
+          <i data-feather="plus"></i>
+          <p>Add Project</p>
+        </div>
       </div>
     </nav>
     <main>
       <h2>All Tasks</h2>
-      <div class="task-container">
-
+      <div class="main--task-container">
+        <div class="task">
+          <i data-feather="circle"></i>
+          <p>Learn JS</p>
+          <i data-feather="edit"></i>
+          <i data-feather="x"></i>
+        </div>
+        <div class="task">
+          <i data-feather="circle"></i>
+          <p>Learn JS</p>
+          <i data-feather="edit"></i>
+          <i data-feather="x"></i>
+        </div>
+        <div class="task">
+          <i data-feather="circle"></i>
+          <p>Learn JS</p>
+          <i data-feather="edit"></i>
+          <i data-feather="x"></i>
+        </div>
+      </div>
+      <div class="main--add-task-container">
+        <div class="form--add-task">
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title" required>
+          <label for="detail">Details</label>
+          <textarea name="detail" id="detail"></textarea>
+          <label for="date">Due date</label>
+          <input type="date" name="date" id="date">
+        </div>
+        <div class="button--add-task">
+          <i data-feather="plus"></i>
+          <p>Add Task</p>
+        </div>
       </div>
     </main>
     <footer></footer>
+    <script>
+      feather.replace();
+    </script>
   </body>
 </html>
