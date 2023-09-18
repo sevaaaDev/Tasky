@@ -10,6 +10,8 @@
   --primary-clr: #1e1e2e;
   --secondary-clr: #74c7ec;
   --tertiary-clr: #313244;
+  --green: #40a02b;
+  --red: #d20f39;
 }
 
 h1,
@@ -30,6 +32,25 @@ nav {
   color: white;
 }
 
+.button--check {
+  background-color: var(--green);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 0.2rem;
+}
+
+.button--x {
+  background-color: var(--red);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 0.2rem;
+}
 * {
   margin: 0;
   padding: 0;
@@ -91,6 +112,17 @@ nav .nav--project-container div {
   font-size: 1.1rem;
 }
 
+nav .nav--add-project-container .form--add-project {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+nav .nav--add-project-container .form--add-project input {
+  width: 100%;
+  grid-column: 1 / 3;
+  padding: 0.2rem;
+}
+
 nav .nav--add-project-container .button--add-project {
   display: flex;
   align-items: center;
@@ -148,6 +180,12 @@ main .main--add-task-container .form--add-task__invisible {
 
 main .main--add-task-container .form--add-task label {
   display: block;
+}
+
+main .main--add-task-container .form--submit {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0.5rem 0 0;
 }
 
 main input,
