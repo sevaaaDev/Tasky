@@ -32,6 +32,11 @@ nav {
   color: white;
 }
 
+svg {
+  width: 20px;
+  height: 20px;
+}
+
 .button--check {
   background-color: var(--green);
   border: none;
@@ -51,6 +56,16 @@ nav {
   color: white;
   padding: 0.2rem;
 }
+
+.task button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  border: none;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -92,7 +107,8 @@ nav .nav--filter-container {
   margin: 0 0 1rem;
 }
 
-nav .nav--filter-container div {
+nav .nav--filter-container div,
+nav .nav--project-container div {
   padding: 0.3rem;
   margin: 0.1rem;
   font-size: 1.1rem;
@@ -104,12 +120,6 @@ nav .nav--filter-container div {
 nav h3 {
   padding: 0.3rem;
   font-size: 1.5rem;
-}
-
-nav .nav--project-container div {
-  padding: 0.3rem;
-  margin: 0.1rem;
-  font-size: 1.1rem;
 }
 
 nav .nav--add-project-container .form--add-project {
@@ -195,4 +205,20 @@ main textarea {
   padding: 0.2rem;
   margin: 0 0 0.5rem;
   border: 2px solid black;
+}
+
+@media (width > 768px) {
+  body {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+  }
+
+  .header--wrapper {
+    width: auto;
+    padding: 0 1rem;
+  }
+
+  .header--wrapper svg {
+    display: none;
+  }
 }
