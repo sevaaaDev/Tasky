@@ -30,6 +30,9 @@ nav .nav-task-container div {
   padding: 0.3rem;
   margin: 0.1rem;
   font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 nav h3 {
@@ -42,13 +45,44 @@ nav .nav-project-container div {
   margin: 0.1rem;
   font-size: 1.1rem;
 }
+
+nav .nav-project-container .add-project {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 main {
   grid-column: 2 / 3;
 }
 
 main h2 {
   margin: 1rem 6rem 0;
+  padding: 0.5rem;
 }
 main .task-container {
   margin: 0 6rem;
+}
+
+main .task-container div.task {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  margin: 0.3rem 0;
+  border: 1px solid black;
+}
+
+main .task-container div.task p {
+  margin-right: auto;
+}
+
+main .add-task-container {
+  display: grid;
+  margin: 0 6rem;
+}
+main .add-task-container .add-task {
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  gap: 0.5rem;
 }
