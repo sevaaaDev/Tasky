@@ -86,3 +86,27 @@ main .add-task-container .add-task {
   align-items: center;
   gap: 0.5rem;
 }
+main .add-task-container .add-task.invisible {
+  display: none;
+}
+
+main .add-task-container .add-task-form {
+  border: 1px solid black;
+  padding: 1rem 2rem;
+}
+main .add-task-container .add-task-form.invisible {
+  display: none;
+}
+
+main .add-task-container .add-task-form label {
+  display: block;
+}
+
+main input,
+main textarea {
+  width: 100%;
+  resize: none;
+  padding: 0.2rem;
+  margin: 0 0 0.5rem;
+  border: 2px solid black;
+}
