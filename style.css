@@ -205,6 +205,7 @@ main .main--add-task-container .button--add-task {
 }
 
 main .main--add-task-container .form--add-task {
+  display: block;
   border: 1px solid black;
   padding: 1rem 2rem;
 }
