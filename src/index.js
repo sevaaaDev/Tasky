@@ -4,56 +4,51 @@ import {
   displayTodoToDOM,
   selectDOM,
   displayProjectToDOM,
+  highlightSelected,
+  showFormProject,
+  cancelAddProject,
 } from "./displayController.js";
+import { filterToday, filter7days } from "./todoFilter.js";
 
-function startScript() {
-  let container = [];
-  let currentProject = 0;
-  checkLocalStorage();
-  function checkLocalStorage() {
-    if (localStorage.length !== 0) {
-      container = JSON.parse(localStorage.getItem("container"));
-      console.log(container)
-      displayProjectToDOM(container, container.length - 1);
-      displayTodoToDOM(container, currentProject);
-      return;
+function addGlobalEventListener(type, selector, callback) {
+  document.addEventListener(type, (e) => {
+    if (e.target.matches(selector)) {
+      callback(e);
     }
-    createNewProject("js");
-  }
-
-  function createNewProject(name) {
-    createProject(container, name);
-    displayProjectToDOM(container, container.length - 1);
-    localStorage.setItem("container", JSON.stringify(container));
-    let project = selectDOM(`[data-id='${container.length - 1}'`);
-    project.addEventListener("click", () => {
-      if (currentProject === +project.dataset.id) return;
-      currentProject = +project.dataset.id;
-      displayTodoToDOM(container, currentProject);
-      console.log(currentProject);
-    });
-  }
-
-  const input = {
-    name: document.querySelector("#name"),
-    desc: document.querySelector("#desc"),
-    date: document.querySelector("#date"),
-    priority: document.querySelector("#priority"),
-  };
-
-  const form = document.querySelector("form");
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    createTodo(
-      container,
-      currentProject,
-      input.name.value,
-      input.desc.value,
-      input.date.value,
-      input.priority.value
-    );
-    displayTodoToDOM(container, currentProject);
-    localStorage.setItem("container", JSON.stringify(container));
   });
 }
-startScript();
+addGlobalEventListener("click", ".button--all-tasks", highlightSelected);
+addGlobalEventListener("click", ".button--today-tasks", highlightSelected);
+addGlobalEventListener("click", ".button--thisweek-tasks", highlightSelected);
+addGlobalEventListener("click", ".button--add-project", showFormProject);
+addGlobalEventListener("click", "nav .button--x", cancelAddProject);
+addGlobalEventListener("click", "nav .button--x svg", cancelAddProject);
+addGlobalEventListener("click", "nav .button--check", formProject);
+addGlobalEventListener("click", "nav .button--check svg", formProject);
+addGlobalEventListener("submit", "nav form", formProject);
+
+let container = [];
+let currentProject = 1;
+function createNewProject(container, name) {
+  createProject(container, name);
+  displayProjectToDOM(container, container.length - 1);
+  const project = document.querySelector(
+    `[data-index='${container.length - 1}']`
+  );
+  console.log(project);
+  project.addEventListener("click", (e) => {
+    if (currentProject === +project.dataset.index) return;
+    currentProject = +project.dataset.index;
+    highlightSelected(e);
+    console.log(currentProject);
+  });
+}
+
+function formProject(e) {
+  e.preventDefault();
+  const input = document.querySelector("nav form input");
+  createNewProject(container, input.value);
+  cancelAddProject();
+}
+
+createNewProject(container, "ReactJS");
