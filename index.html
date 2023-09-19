@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script src="main.js" defer></script> -->
+    <script src="main.js" defer></script>
     <script src="feather.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Todo List</title>
@@ -17,23 +17,23 @@
     </header>
     <nav>
       <div class="nav--filter-container">
-        <div class="button--all-tasks"><i data-feather="home"></i> All Tasks</div>
+        <div class="button--all-tasks selected"><i data-feather="home"></i> All Tasks</div>
         <div class="button--today-tasks"><i data-feather="calendar"></i>Today</div>
-        <div class="button--thisweek-task"><i data-feather="calendar"></i>Next 7 Days</div>
+        <div class="button--thisweek-tasks"><i data-feather="calendar"></i>Next 7 Days</div>
       </div>
       <h3>Projects</h3>
       <div class="nav--project-container">
         <div class="project"><i data-feather="folder"></i>Javascript</div>
       </div>
       <div class="nav--add-project-container">
-        <form class="form--add-project">
+        <form class="form--add-project__invisible">
           <input type="text" name="title" id="project-title" placeholder="Project Name">
           <button type="button" class="button--check"><i data-feather="check"></i></button>
           <button type="button" class="button--x"><i data-feather="x"></i></button>
         </form>
         <div class="button--add-project">
           <i data-feather="plus"></i>
-          <p>Add Project</p>
+          Add Project
         </div>
       </div>
     </nav>
@@ -44,8 +44,10 @@
           <button type="button" class="button--status">
             <i data-feather="circle"></i>
           </button>
-          <p>Learn JS</p>
+          <p class="task--title">Learn JS</p>
           <!-- <input type="text" name="title" id="edit-title" value="Learn JS"> -->
+          <!-- <p class="task--date">12th Nov</p> -->
+          <input type="date" name="date" id="edit-date" value="" pattern="\d{4}-\d{2}-\d{2}">
           <button type="button" class="button--edit">
             <i data-feather="edit"></i>
           </button>
@@ -53,13 +55,15 @@
             <i data-feather="x"></i>
           </button>
         </div>
+        <div class="form--submit">
+          <button type="button" class="button--check"><i data-feather="check"></i></button>
+          <button type="button" class="button--x"><i data-feather="x"></i></button>
+        </div>
       </div>
       <div class="main--add-task-container">
-        <div class="form--add-task">
+        <div class="form--add-task__invisible">
           <label for="title">Title</label>
           <input type="text" name="title" id="title" required>
-          <label for="detail">Details</label>
-          <textarea name="detail" id="detail"></textarea>
           <label for="date">Due date</label>
           <input type="date" name="date" id="date">
           <div class="form--submit">

@@ -8,8 +8,10 @@
 
 :root {
   --primary-clr: #1e1e2e;
-  --secondary-clr: #74c7ec;
+  --secondary-clr: #45475a;
   --tertiary-clr: #313244;
+  --selected-btn: hsl(237, 16%, 16%);
+  --font-color: white;
   --green: #40a02b;
   --red: #d20f39;
 }
@@ -29,12 +31,16 @@ textarea {
 header,
 main,
 nav {
-  color: white;
+  color: var(--font-color);
 }
 
 svg {
   width: 20px;
   height: 20px;
+}
+
+[class*="__invisible"] {
+  display: none;
 }
 
 .button--check {
@@ -73,8 +79,6 @@ svg {
 }
 
 body {
-  /* display: grid; */
-  /* grid-template-columns: 1fr 4fr; */
   min-height: 100%;
 }
 
@@ -115,6 +119,12 @@ nav .nav--project-container div {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  cursor: pointer;
+}
+
+nav .nav--filter-container div.selected,
+nav .nav--project-container div.selected {
+  background-color: var(--selected-btn);
 }
 
 nav h3 {
@@ -137,22 +147,26 @@ nav .nav--add-project-container .button--add-project {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  padding: 0.2rem;
+  cursor: pointer;
 }
 
 main {
   grid-column: 2 / 3;
-  background-color: var(--tertiary-clr);
+  background-color: var(--secondary-clr);
 }
 
 main h2 {
   font-size: clamp(1.1rem, 5vw, 1.5rem);
   width: 90%;
+  max-width: 50rem;
   margin: auto;
   padding: 0.5rem 0;
 }
 main .main--task-container,
 main .main--add-task-container {
   width: 90%;
+  max-width: 50rem;
   margin: auto;
 }
 
@@ -165,7 +179,7 @@ main .main--task-container div.task {
   border: 1px solid black;
 }
 
-main .main--task-container div.task p {
+main .main--task-container div.task .task--title {
   margin-right: auto;
 }
 
@@ -178,6 +192,10 @@ main .main--task-container .task input {
   outline: none;
 }
 
+main .main--task-container .task [type="date"] {
+  width: 8.5rem;
+}
+
 main .main--add-task-container .button--add-task {
   display: flex;
   padding: 0.5rem;
@@ -185,30 +203,26 @@ main .main--add-task-container .button--add-task {
   align-items: center;
   gap: 0.5rem;
 }
-main .main--add-task-container .button--add-task__invisible {
-  display: none;
-}
 
 main .main--add-task-container .form--add-task {
   border: 1px solid black;
   padding: 1rem 2rem;
-}
-main .main--add-task-container .form--add-task__invisible {
-  display: none;
 }
 
 main .main--add-task-container .form--add-task label {
   display: block;
 }
 
-main .main--add-task-container .form--submit {
+main .form--submit {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+}
+
+main .main--add-task-container .form--submit {
   margin: 0.5rem 0 0;
 }
 
-main input,
-main textarea {
+main .form--add-task input {
   width: 100%;
   resize: none;
   padding: 0.2rem;
