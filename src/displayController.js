@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export function displayTaskToDOM(container, projectIndex) {
   const buttons = [{
     type: 'status',
@@ -32,12 +34,16 @@ export function displayTaskToDOM(container, projectIndex) {
     const title = document.createElement('p')
     title.innerText = task.name
     title.classList.add('task--title')
+    const dueDate = document.createElement('p')
+    dueDate.innerText = ` Due ${format(task.dueDate, 'd')} ${format(task.dueDate, 'MMM')} ${format(task.dueDate, 'y')}`
+    dueDate.classList.add('task--date')
     taskElement.setAttribute("data-index", task["oriIndex"]);
     taskElement.setAttribute("data-project", task["project"]);
     console.log(task.dueDate)
     taskContainer.append(taskElement);
     const btnEdit = document.querySelector(`main div[data-project="${task.project}"][data-index="${task.oriIndex}"] .button--edit`)
     taskElement.insertBefore(title, btnEdit) 
+    taskElement.insertBefore(dueDate, btnEdit) 
   }
 }
 
@@ -60,11 +66,15 @@ function displayAllTask(container, buttons) {
     const title = document.createElement('p')
     title.innerText = task.name
     title.classList.add('task--title')
+    const dueDate = document.createElement('p')
+    dueDate.innerText = ` Due ${format(task.dueDate, 'd')} ${format(task.dueDate, 'MMM')} ${format(task.dueDate, 'y')}`
+    dueDate.classList.add('task--date')
     taskElement.setAttribute("data-index", task["oriIndex"]);
     taskElement.setAttribute("data-project", task["project"]);
     taskContainer.append(taskElement);
     const btnEdit = document.querySelector(`main div[data-project="${task.project}"][data-index="${task.oriIndex}"] .button--edit`)
     taskElement.insertBefore(title, btnEdit) 
+    taskElement.insertBefore(dueDate, btnEdit) 
     }
   }
 }
