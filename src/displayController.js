@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { da } from "date-fns/locale";
 
 export function displayTaskToDOM(container, projectIndex) {
   const buttons = [{
@@ -94,11 +95,6 @@ function resetTaskDisplay() {
   taskContainer.innerHTML = "";
 }
 
-function resetProjectDisplay() {
-  const projectContainer = document.querySelector(".project-container");
-  projectContainer.innerHTML = "";
-}
-
 export function displayProjectToDOM(container, projectIndex) {
   const projectContainer = document.querySelector(".nav--project-container");
   const div = document.createElement("div");
@@ -165,4 +161,18 @@ export function cancelAdd(type) {
   if (date !== null) {date.value = ''}
   form.classList.remove(`form--add-${type}`);
   btnAdd.classList.add(`button--add-${type}`);
+}
+
+export function checklistTaskDOM(projectIndex, taskIndex) {
+  const task = document.querySelector(`[data-project="${projectIndex}"][data-index="${taskIndex}"]`)
+  const img = task.querySelector('.button--status img')
+  const title = task.querySelector('.task--title')
+  const date = task.querySelector('.task--date')
+  console.log(title.className)
+  img.setAttribute('src', 'icons/check-circle.svg')
+  if (title.classList.contains('checked')) {
+    img.setAttribute('src', 'icons/circle.svg')
+  }
+  title.classList.toggle('checked')
+  date.classList.toggle('checked')
 }

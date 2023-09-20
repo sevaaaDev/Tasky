@@ -7,6 +7,7 @@ import {
   showFormProject,
   cancelAdd,
   displayTaskToDOM,
+  checklistTaskDOM,
 } from "./displayController.js";
 import { filterToday, filter7days } from "./taskFilter.js";
 
@@ -32,6 +33,7 @@ addGlobalEventListener("click", "main .button--check svg", formTask);
 addGlobalEventListener("submit", "main form", formTask);
 addGlobalEventListener("click", "main .button--x", cancelAdd.bind(null, 'task'));
 addGlobalEventListener("click", "main .button--x svg", cancelAdd.bind(null, 'task'));
+addGlobalEventListener('click', '.button--status img', checklistTheTask)
 
 let container = [];
 let currentProject = 1;
@@ -79,4 +81,12 @@ function selected(e) {
   console.log(currentProject);
   cancelAdd('task')
   displayTaskToDOM(container, currentProject);
+}
+
+function checklistTheTask(e) {
+  const task = e.target.closest('.task')
+  console.log(task)
+  checklist(container, task.dataset.project, task.dataset.index)
+  checklistTaskDOM(task.dataset.project, task.dataset.index)
+  console.log(container)
 }
