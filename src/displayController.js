@@ -1,6 +1,16 @@
 export function displayTaskToDOM(container, projectIndex) {
+  const buttons = [{
+    type: 'status',
+    icon: 'circle.svg'
+  },{
+    type: 'edit',
+    icon: 'edit.svg'
+  },{
+    type: 'delete',
+    icon: 'x.svg'
+  },]
   if (projectIndex === 'all') {
-    displayAllTask(container)
+    displayAllTask(container, buttons)
     disableAddTask()
     return
   }
@@ -10,22 +20,50 @@ export function displayTaskToDOM(container, projectIndex) {
   for (let task of container[projectIndex].task) {
     const taskElement = document.createElement("div");
     taskElement.classList.add("task");
+    for (let button of buttons) {
+      const btn = document.createElement('button') 
+      btn.setAttribute('type', 'button')
+      btn.classList.add(`button--${button.type}`)
+      const img = document.createElement('img')
+      img.setAttribute('src', `icons/${button.icon}`)
+      btn.append(img)
+      taskElement.append(btn)
+    }
+    const title = document.createElement('p')
+    title.innerText = task.name
+    title.classList.add('task--title')
     taskElement.setAttribute("data-index", task["oriIndex"]);
-    taskElement.innerText = `${task["name"]}`;
+    taskElement.setAttribute("data-project", task["project"]);
     taskContainer.append(taskElement);
+    const btnEdit = document.querySelector(`main div[data-project="${task.project}"][data-index="${task.oriIndex}"] .button--edit`)
+    taskElement.insertBefore(title, btnEdit) 
   }
 }
 
-function displayAllTask(container) {
+function displayAllTask(container, buttons) {
   resetTaskDisplay()
   const taskContainer = document.querySelector('.main--task-container')
   for(let project of container) {
     for(let task of project.task) {
     const taskElement = document.createElement("div");
     taskElement.classList.add("task");
+    for (let button of buttons) {
+      const btn = document.createElement('button') 
+      btn.setAttribute('type', 'button')
+      btn.classList.add(`button--${button.type}`)
+      const img = document.createElement('img')
+      img.setAttribute('src', `icons/${button.icon}`)
+      btn.append(img)
+      taskElement.append(btn)
+    }
+    const title = document.createElement('p')
+    title.innerText = task.name
+    title.classList.add('task--title')
     taskElement.setAttribute("data-index", task["oriIndex"]);
-    taskElement.innerText = `${task["name"]}`;
+    taskElement.setAttribute("data-project", task["project"]);
     taskContainer.append(taskElement);
+    const btnEdit = document.querySelector(`main div[data-project="${task.project}"][data-index="${task.oriIndex}"] .button--edit`)
+    taskElement.insertBefore(title, btnEdit) 
     }
   }
 }
