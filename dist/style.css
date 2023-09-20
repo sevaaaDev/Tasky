@@ -183,6 +183,10 @@ main .main--task-container div.task .task--title {
   margin-right: auto;
 }
 
+.checked {
+  text-decoration: line-through;
+}
+
 main .main--task-container .task input {
   margin: 0;
   background-color: rgba(0, 0, 0, 0);
