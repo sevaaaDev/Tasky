@@ -15,7 +15,7 @@ export function createTask(
 ) {
   let task = {
     name,
-    dueDate,
+    dueDate: new Date(dueDate),
     checklist: false,
     project: projectIndex,
     oriIndex: container[projectIndex].task.length,
