@@ -1,9 +1,11 @@
 export function displayTaskToDOM(container, projectIndex) {
   if (projectIndex === 'all') {
     displayAllTask(container)
+    disableAddTask()
     return
   }
   resetTaskDisplay();
+  enableAddTask()
   const taskContainer = document.querySelector(".main--task-container");
   for (let task of container[projectIndex].task) {
     const taskElement = document.createElement("div");
@@ -28,6 +30,16 @@ function displayAllTask(container) {
   }
 }
 
+function disableAddTask() {
+  const btnAddTask = document.querySelector('[class*="button--add-task"]');
+  btnAddTask.classList.remove('button--add-task')
+}
+
+function enableAddTask() {
+  const btnAddTask = document.querySelector('[class*="button--add-task"]');
+  btnAddTask.classList.add('button--add-task')
+}
+
 function resetTaskDisplay() {
   const taskContainer = document.querySelector(".main--task-container");
   taskContainer.innerHTML = "";
@@ -36,10 +48,6 @@ function resetTaskDisplay() {
 function resetProjectDisplay() {
   const projectContainer = document.querySelector(".project-container");
   projectContainer.innerHTML = "";
-}
-
-export function selectDOM(selector) {
-  return document.querySelector(selector);
 }
 
 export function displayProjectToDOM(container, projectIndex) {
