@@ -43,6 +43,12 @@ export function displayTaskToDOM(container, projectIndex) {
     console.log(task.dueDate)
     taskContainer.append(taskElement);
     const btnEdit = document.querySelector(`main div[data-project="${task.project}"][data-index="${task.oriIndex}"] .button--edit`)
+    const btnStatusIcon = document.querySelector(`main div[data-project="${task.project}"][data-index="${task.oriIndex}"] .button--status img`)
+    if (task.checklist === true) {
+      title.classList.add('checked')
+      dueDate.classList.add('checked')
+      btnStatusIcon.setAttribute('src', 'icons/check-circle.svg')
+    }
     taskElement.insertBefore(title, btnEdit) 
     taskElement.insertBefore(dueDate, btnEdit) 
   }
@@ -74,6 +80,12 @@ function displayAllTask(container, buttons) {
     taskElement.setAttribute("data-project", task["project"]);
     taskContainer.append(taskElement);
     const btnEdit = document.querySelector(`main div[data-project="${task.project}"][data-index="${task.oriIndex}"] .button--edit`)
+    const btnStatusIcon = document.querySelector(`main div[data-project="${task.project}"][data-index="${task.oriIndex}"] .button--status img`)
+    if (task.checklist === true) {
+      title.classList.add('checked')
+      dueDate.classList.add('checked')
+      btnStatusIcon.setAttribute('src', 'icons/check-circle.svg')
+    }
     taskElement.insertBefore(title, btnEdit) 
     taskElement.insertBefore(dueDate, btnEdit) 
     }
