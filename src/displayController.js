@@ -1,18 +1,36 @@
-export function displayTodoToDOM(container, projectIndex) {
-  resetTodoDisplay();
+export function displayTaskToDOM(container, projectIndex) {
+  if (projectIndex === 'all') {
+    displayAllTask(container)
+    return
+  }
+  resetTaskDisplay();
   const taskContainer = document.querySelector(".main--task-container");
-  for (let todo of container[projectIndex].todo) {
-    const todoElement = document.createElement("div");
-    todoElement.classList.add("task");
-    todoElement.setAttribute("data-index", todo["oriIndex"]);
-    todoElement.innerText = `${todo["name"]}`;
-    taskContainer.append(todoElement);
+  for (let task of container[projectIndex].task) {
+    const taskElement = document.createElement("div");
+    taskElement.classList.add("task");
+    taskElement.setAttribute("data-index", task["oriIndex"]);
+    taskElement.innerText = `${task["name"]}`;
+    taskContainer.append(taskElement);
   }
 }
 
-function resetTodoDisplay() {
-  const todoContainer = document.querySelector(".main--task-container");
-  todoContainer.innerHTML = "";
+function displayAllTask(container) {
+  resetTaskDisplay()
+  const taskContainer = document.querySelector('.main--task-container')
+  for(let project of container) {
+    for(let task of project.task) {
+    const taskElement = document.createElement("div");
+    taskElement.classList.add("task");
+    taskElement.setAttribute("data-index", task["oriIndex"]);
+    taskElement.innerText = `${task["name"]}`;
+    taskContainer.append(taskElement);
+    }
+  }
+}
+
+function resetTaskDisplay() {
+  const taskContainer = document.querySelector(".main--task-container");
+  taskContainer.innerHTML = "";
 }
 
 function resetProjectDisplay() {

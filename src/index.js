@@ -1,12 +1,12 @@
-import { createProject, createTodo } from "./todoCreator.js";
+import { createProject, createTask } from "./todoCreator.js";
 import { checklist, editTodo, removeTodo } from "./todoEditor.js";
 import {
-  displayTodoToDOM,
   selectDOM,
   displayProjectToDOM,
   highlightSelected,
   showFormProject,
   cancelAdd,
+  displayTaskToDOM,
 } from "./displayController.js";
 import { filterToday, filter7days } from "./todoFilter.js";
 
@@ -43,9 +43,7 @@ function createNewProject(container, name) {
     `[data-index='${container.length - 1}']`
   );
   console.log(project);
-  project.addEventListener("click", (e) => {
-    selected(e)
-  })
+  project.addEventListener("click", selected)
 }
 
 function formProject(e) {
@@ -60,8 +58,8 @@ function formTask(e) {
   const inputTitle = document.querySelector("main form input");
   const inputDate = document.querySelector('main form input[type="date"]');
   console.log(inputDate, inputTitle)
-  createTodo(container, currentProject, inputTitle.value, inputDate.value);
-  displayTodoToDOM(container, currentProject)
+  createTask(container, currentProject, inputTitle.value, inputDate.value);
+  displayTaskToDOM(container, currentProject)
   cancelAdd('task');
 }
 
@@ -73,5 +71,5 @@ function selected(e) {
   highlightSelected(e);
   console.log(currentProject);
   cancelAdd('task')
-  displayTodoToDOM(container, currentProject);
+  displayTaskToDOM(container, currentProject);
 }
