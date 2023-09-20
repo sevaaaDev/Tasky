@@ -202,6 +202,7 @@ main .main--add-task-container .button--add-task {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  cursor: pointer;
 }
 
 main .main--add-task-container .form--add-task {
