@@ -1,5 +1,5 @@
-import { createProject, createTask } from "./todoCreator.js";
-import { checklist, editTodo, removeTodo } from "./todoEditor.js";
+import { createProject, createTask } from "./taskCreator.js";
+import { checklist, editTodo, removeTodo } from "./taskEditor.js";
 import {
   selectDOM,
   displayProjectToDOM,
@@ -8,7 +8,7 @@ import {
   cancelAdd,
   displayTaskToDOM,
 } from "./displayController.js";
-import { filterToday, filter7days } from "./todoFilter.js";
+import { filterToday, filter7days } from "./taskFilter.js";
 
 function addGlobalEventListener(type, selector, callback) {
   document.addEventListener(type, (e) => {
@@ -57,6 +57,12 @@ function formTask(e) {
   e.preventDefault();
   const inputTitle = document.querySelector("main form input");
   const inputDate = document.querySelector('main form input[type="date"]');
+  inputDate.removeAttribute('style')
+  if (inputDate.value === '') {
+    inputDate.focus()
+    inputDate.style.outline = 'solid red'
+    return
+  }
   console.log(inputDate, inputTitle)
   createTask(container, currentProject, inputTitle.value, inputDate.value);
   displayTaskToDOM(container, currentProject)
@@ -69,6 +75,7 @@ function selected(e) {
   if (currentProject === e.target.dataset.index) return;
   currentProject = e.target.dataset.index;
   highlightSelected(e);
+  console.log(container)
   console.log(currentProject);
   cancelAdd('task')
   displayTaskToDOM(container, currentProject);
