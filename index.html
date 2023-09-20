@@ -17,9 +17,9 @@
     </header>
     <nav>
       <div class="nav--filter-container">
-        <div class="button--all-tasks selected"><i data-feather="home"></i> All Tasks</div>
-        <div class="button--today-tasks"><i data-feather="calendar"></i>Today</div>
-        <div class="button--thisweek-tasks"><i data-feather="calendar"></i>Next 7 Days</div>
+        <div class="button--all-tasks selected" data-index="all"><i data-feather="home"></i> All Tasks</div>
+        <div class="button--today-tasks" data-index="today"><i data-feather="calendar"></i>Today</div>
+        <div class="button--thisweek-tasks" data-index="7day"><i data-feather="calendar"></i>Next 7 Days</div>
       </div>
       <h3>Projects</h3>
       <div class="nav--project-container">
@@ -61,7 +61,7 @@
         </div>
       </div>
       <div class="main--add-task-container">
-        <div class="form--add-task__invisible">
+        <form class="form--add-task__invisible">
           <label for="title">Title</label>
           <input type="text" name="title" id="title" required>
           <label for="date">Due date</label>
@@ -70,7 +70,7 @@
             <button type="button" class="button--check"><i data-feather="check"></i></button>
             <button type="button" class="button--x"><i data-feather="x"></i></button>
           </div>
-        </div>
+        </form>
         <div class="button--add-task">
           <i data-feather="plus"></i>
           Add Task
