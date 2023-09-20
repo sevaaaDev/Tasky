@@ -2,17 +2,16 @@ export function displayTodoToDOM(container, projectIndex) {
   resetTodoDisplay();
   const taskContainer = document.querySelector(".main--task-container");
   for (let todo of container[projectIndex].todo) {
-    for (let prop in todo) {
-      const todoElement = document.createElement("div");
-      todoElement.setAttribute("data-id", todo["oriIndex"]);
-      todoElement.innerText = `${todo["name"]}`;
-      taskContainer.append(todoElement);
-    }
+    const todoElement = document.createElement("div");
+    todoElement.classList.add("task");
+    todoElement.setAttribute("data-index", todo["oriIndex"]);
+    todoElement.innerText = `${todo["name"]}`;
+    taskContainer.append(todoElement);
   }
 }
 
 function resetTodoDisplay() {
-  const todoContainer = document.querySelector(".todo-container");
+  const todoContainer = document.querySelector(".main--task-container");
   todoContainer.innerHTML = "";
 }
 
@@ -51,7 +50,6 @@ export function highlightSelected(e) {
     }
     return;
   }
-  console.log(btnProject);
   e.target.classList.add("selected");
 }
 
@@ -83,11 +81,11 @@ export function showFormProject(e) {
   input.focus();
 }
 
-export function cancelAddProject() {
-  const form = document.querySelector('[class*="form--add-project"]');
-  const btnAdd = document.querySelector('[class*="button--add-project"]');
+export function cancelAdd(type) {
+  const form = document.querySelector(`[class*="form--add-${type}"]`);
+  const btnAdd = document.querySelector(`[class*="button--add-${type}"]`);
   const input = form.querySelector("input");
   input.value = "";
-  form.classList.toggle("form--add-project");
-  btnAdd.classList.toggle("button--add-project");
+  form.classList.remove(`form--add-${type}`);
+  btnAdd.classList.add(`button--add-${type}`);
 }
