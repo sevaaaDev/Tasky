@@ -34,6 +34,7 @@ export function displayTaskToDOM(container, projectIndex) {
     title.classList.add('task--title')
     taskElement.setAttribute("data-index", task["oriIndex"]);
     taskElement.setAttribute("data-project", task["project"]);
+    console.log(task.dueDate)
     taskContainer.append(taskElement);
     const btnEdit = document.querySelector(`main div[data-project="${task.project}"][data-index="${task.oriIndex}"] .button--edit`)
     taskElement.insertBefore(title, btnEdit) 
@@ -148,8 +149,10 @@ export function showFormProject(e) {
 export function cancelAdd(type) {
   const form = document.querySelector(`[class*="form--add-${type}"]`);
   const btnAdd = document.querySelector(`[class*="button--add-${type}"]`);
-  const input = form.querySelector("input");
+  const input = form.querySelector("input[type='text']");
+  const date = form.querySelector("input[type='date']");
   input.value = "";
+  if (date !== null) {date.value = ''}
   form.classList.remove(`form--add-${type}`);
   btnAdd.classList.add(`button--add-${type}`);
 }
