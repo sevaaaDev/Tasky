@@ -14,5 +14,12 @@ export function editTask(container, projectIndex, taskIndex, name, description, 
 }
 
 export function removeTask(container, projectIndex, taskIndex) {
-  container[projectIndex].task.splice(taskIndex, 1)
+  let index
+  for (let elem of container[projectIndex].task) {
+    if (elem.oriIndex === +taskIndex) {
+      index = container[projectIndex].task.indexOf(elem)
+    }
+  }
+  console.log(index)
+  container[projectIndex].task.splice(index, 1)
 }
