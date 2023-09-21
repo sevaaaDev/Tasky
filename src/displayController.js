@@ -1,5 +1,4 @@
 import { format } from "date-fns";
-import { da } from "date-fns/locale";
 
 export function displayTaskToDOM(container, projectIndex) {
   const buttons = [{
@@ -187,4 +186,9 @@ export function checklistTaskDOM(projectIndex, taskIndex) {
   }
   title.classList.toggle('checked')
   date.classList.toggle('checked')
+}
+
+export function removeTaskDOM(projectIndex, taskIndex) {
+  const task = document.querySelector(`[data-project="${projectIndex}"][data-index="${taskIndex}"]`)
+  task.remove()
 }
