@@ -33,6 +33,8 @@ export function displayTaskToDOM(container, projectIndex) {
       btn.append(img)
       taskElement.append(btn)
     }
+    const infoWrapper = document.createElement('div')
+    infoWrapper.classList.add('task--info-wrapper')
     const title = document.createElement('p')
     title.innerText = task.name
     title.classList.add('task--title')
@@ -50,8 +52,8 @@ export function displayTaskToDOM(container, projectIndex) {
       dueDate.classList.add('checked')
       btnStatusIcon.setAttribute('src', 'icons/check-circle.svg')
     }
-    taskElement.insertBefore(title, btnEdit) 
-    taskElement.insertBefore(dueDate, btnEdit) 
+    infoWrapper.append(title, dueDate)
+    taskElement.insertBefore(infoWrapper, btnEdit) 
   }
 }
 
@@ -71,6 +73,8 @@ function displayAllTask(container, buttons) {
       btn.append(img)
       taskElement.append(btn)
     }
+    const infoWrapper = document.createElement('div')
+    infoWrapper.classList.add('task--info-wrapper')
     const title = document.createElement('p')
     title.innerText = task.name
     title.classList.add('task--title')
@@ -87,8 +91,8 @@ function displayAllTask(container, buttons) {
       dueDate.classList.add('checked')
       btnStatusIcon.setAttribute('src', 'icons/check-circle.svg')
     }
-    taskElement.insertBefore(title, btnEdit) 
-    taskElement.insertBefore(dueDate, btnEdit) 
+    infoWrapper.append(title, dueDate)
+    taskElement.insertBefore(infoWrapper, btnEdit) 
     }
   }
 }
