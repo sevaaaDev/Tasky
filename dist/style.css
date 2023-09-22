@@ -127,6 +127,10 @@ nav .nav--project-container div.selected {
   background-color: var(--selected-btn);
 }
 
+nav .btn--delete-project {
+  margin-left: auto;
+}
+
 nav h3 {
   padding: 0.3rem;
   font-size: 1.5rem;
@@ -171,7 +175,9 @@ main .main--add-task-container {
 }
 
 main .main--task-container div.task {
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
   align-items: center;
   gap: 1rem;
   padding: 0.5rem;
@@ -179,9 +185,15 @@ main .main--task-container div.task {
   border: 1px solid black;
 }
 
-main .main--task-container div.task .task--title {
-  margin-right: auto;
+main .main--task-container div.task .task--info-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
+
+/* main .main--task-container div.task .task--title {
+  margin-right: auto;
+} */
 
 .checked {
   text-decoration: line-through;
@@ -189,7 +201,7 @@ main .main--task-container div.task .task--title {
 
 main .main--task-container .task input {
   margin-right: auto;
-  width: 60%;
+  width: 40%;
   background-color: rgba(0, 0, 0, 0);
   color: white;
   font-size: 1rem;
