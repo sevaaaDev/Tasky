@@ -188,7 +188,8 @@ main .main--task-container div.task .task--title {
 }
 
 main .main--task-container .task input {
-  margin: 0;
+  margin-right: auto;
+  width: 60%;
   background-color: rgba(0, 0, 0, 0);
   color: white;
   font-size: 1rem;
@@ -197,6 +198,7 @@ main .main--task-container .task input {
 }
 
 main .main--task-container .task [type="date"] {
+  margin: 0;
   width: 8.5rem;
 }
 
