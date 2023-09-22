@@ -30,6 +30,7 @@ function addGlobalEventListener(type, selector, callback) {
 addGlobalEventListener("click", ".button--all-tasks", selected);
 addGlobalEventListener("click", ".button--today-tasks", selected);
 addGlobalEventListener("click", ".button--thisweek-tasks", selected);
+addGlobalEventListener('click', 'nav .project', selected)
 addGlobalEventListener("click", ".button--add-project", showFormProject);
 addGlobalEventListener("click", "nav .button--x", cancelAdd.bind(null, 'project'));
 addGlobalEventListener("click", "nav .button--x svg", cancelAdd.bind(null, 'project'));
@@ -53,12 +54,7 @@ let currentProject = 1;
 
 function createNewProject(container, name) {
   createProject(container, name);
-  displayProjectToDOM(container, container.length - 1);
-  const project = document.querySelector(
-    `[data-index='${container.length - 1}']`
-  );
-  console.log(project);
-  project.addEventListener("click", selected)
+  displayProjectToDOM(container);
 }
 
 function formProject(e) {
