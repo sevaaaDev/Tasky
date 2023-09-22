@@ -39,6 +39,8 @@ export function getProjectIndex(container, projectID) {
       return container.indexOf(elem)
     }
   }
+  console.log('Something is wrong')
+  return projectID
 }
 
 function generateID() {
