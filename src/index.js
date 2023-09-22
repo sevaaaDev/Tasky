@@ -111,21 +111,21 @@ function removeTheTask(e) {
   console.log(container)
 }
 
-// function editTheTask(e) {
-//   const task = e.target.closest('.task')
-//   console.log(task)
-//   editTaskDOM(container, currentProject, task.dataset.project, task.dataset.index, getIndex(container, currentProject,task.dataset.index))
-// }
+function editTheTask(e) {
+  const task = e.target.closest('.task')
+  console.log(task)
+  editTaskDOM(container, currentProject, getProjectIndex(container, task.dataset.project), getTaskIndex(container, getProjectIndex(container, task.dataset.project), task.dataset.index), task.dataset.project, task.dataset.index)
+}
 
-// function submitEditedTask(e) {
-//   const btnWrapper = e.target.closest('.form--submit')
-//   const task = btnWrapper.previousSibling
-//   const inputTitle = task.querySelector('input')
-//   const inputDate = task.querySelector('[type="date"]')
-//   editTask(container, task.dataset.project, getIndex(container, currentProject,task.dataset.index), inputTitle.value, inputDate.value)
-//   displayTaskToDOM(container, currentProject)
-// }
+function submitEditedTask(e) {
+  const btnWrapper = e.target.closest('.form--submit')
+  const task = btnWrapper.previousSibling
+  const inputTitle = task.querySelector('input')
+  const inputDate = task.querySelector('[type="date"]')
+  editTask(container, getProjectIndex(container, task.dataset.project) , getTaskIndex(container, getProjectIndex(container, task.dataset.project) ,task.dataset.index), inputTitle.value, inputDate.value)
+  displayTaskToDOM(container, currentProject)
+}
 
-// function cancelEdit() {
-//   displayTaskToDOM(container, currentProject)
-// }
+function cancelEdit() {
+  displayTaskToDOM(container, currentProject)
+}
