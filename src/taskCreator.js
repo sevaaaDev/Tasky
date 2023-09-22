@@ -2,6 +2,7 @@ export function createProject(container, name) {
   let project = {
     task: [],
     name,
+    ID: generateID()
   };
 
   container.push(project);
@@ -17,9 +18,29 @@ export function createTask(
     name,
     dueDate: new Date(dueDate),
     checklist: false,
-    project: projectIndex,
-    oriIndex: container[projectIndex].task.length,
+    project: container[projectIndex].ID,
+    ID: generateID()
   };
 
   container[projectIndex].task.push(task);
+}
+
+export function getTaskIndex(container, projectIndex, taskID) {
+  for (let elem of container[projectIndex].task) {
+    if (elem.ID === +taskID) {
+      return container[projectIndex].task.indexOf(elem)
+    }
+  }
+}
+
+export function getProjectIndex(container, projectID) {
+  for (let elem of container) {
+    if (elem.ID === +projectID) {
+      return container.indexOf(elem)
+    }
+  }
+}
+
+function generateID() {
+  return Math.floor(Math.random() * 9999)
 }

@@ -1,15 +1,23 @@
-import { createProject, createTask } from "./taskCreator.js";
-import { checklist, editTodo, removeTask, removeTodo } from "./taskEditor.js";
-import {
-  selectDOM,
-  displayProjectToDOM,
-  highlightSelected,
-  showFormProject,
-  cancelAdd,
-  displayTaskToDOM,
-  checklistTaskDOM,
-  removeTaskDOM,
-} from "./displayController.js";
+import { createProject, createTask, getIndex, getProjectIndex, getTaskIndex } from "./taskCreator.js";
+import { checklist, editTask, editTodo, removeTask, removeTodo } from "./taskEditor.js";
+// import {
+//   selectDOM,
+//   displayProjectToDOM,
+//   highlightSelected,
+//   showFormProject,
+//   cancelAdd,
+//   displayTaskToDOM,
+//   checklistTaskDOM,
+//   removeTaskDOM,
+//   editTaskDOM,
+//   hideButtonSubmit,
+//   applyEditedTaskDOM,
+// } from "./displayController/displayController.js";
+import { displayTaskToDOM } from "./displayController/displayTask.js";
+import { displayProjectToDOM } from "./displayController/displayProject.js";
+import { showFormProject, cancelAdd } from "./displayController/addTaskOrProject.js";
+import { checklistTaskDOM, removeTaskDOM, editTaskDOM } from "./displayController/editTask.js";
+import { highlightSelected } from "./displayController/displayBehavior.js";
 import { filterToday, filter7days } from "./taskFilter.js";
 
 function addGlobalEventListener(type, selector, callback) {
@@ -29,13 +37,16 @@ addGlobalEventListener("click", "nav .button--check", formProject);
 addGlobalEventListener("click", "nav .button--check svg", formProject);
 addGlobalEventListener("submit", "nav form", formProject);
 addGlobalEventListener("click", ".button--add-task", showFormProject);
-addGlobalEventListener("click", "main .button--check", formTask);
-addGlobalEventListener("click", "main .button--check svg", formTask);
+addGlobalEventListener("click", "main form .button--check", formTask);
+addGlobalEventListener("click", "main form .button--check svg", formTask);
 addGlobalEventListener("submit", "main form", formTask);
-addGlobalEventListener("click", "main .button--x", cancelAdd.bind(null, 'task'));
-addGlobalEventListener("click", "main .button--x svg", cancelAdd.bind(null, 'task'));
+addGlobalEventListener("click", "main form .button--x", cancelAdd.bind(null, 'task'));
+addGlobalEventListener("click", "main form .button--x svg", cancelAdd.bind(null, 'task'));
 addGlobalEventListener('click', '.button--status img', checklistTheTask)
 addGlobalEventListener('click', ".button--delete img", removeTheTask)
+addGlobalEventListener('click', '.button--edit img', editTheTask)
+addGlobalEventListener('click', "main .main--task-container .button--check", submitEditedTask)
+addGlobalEventListener('click', "main .main--task-container .button--x", cancelEdit)
 
 let container = [];
 let currentProject = 1;
@@ -87,7 +98,7 @@ function selected(e) {
 
 function checklistTheTask(e) {
   const task = e.target.closest('.task')
-  checklist(container, task.dataset.project, task.dataset.index)
+  checklist(container,getProjectIndex(container, task.dataset.project), getTaskIndex(container, getProjectIndex(container, task.dataset.project), task.dataset.index))
   checklistTaskDOM(task.dataset.project, task.dataset.index)
   console.log(container)
 }
@@ -95,7 +106,26 @@ function checklistTheTask(e) {
 function removeTheTask(e) {
   const task = e.target.closest('.task')
   console.log(task)
-  removeTask(container, task.dataset.project, task.dataset.index)
+  removeTask(container,getProjectIndex(container, task.dataset.project), getTaskIndex(container, getProjectIndex(container, task.dataset.project), task.dataset.index))
   removeTaskDOM(task.dataset.project, task.dataset.index)
   console.log(container)
 }
+
+// function editTheTask(e) {
+//   const task = e.target.closest('.task')
+//   console.log(task)
+//   editTaskDOM(container, currentProject, task.dataset.project, task.dataset.index, getIndex(container, currentProject,task.dataset.index))
+// }
+
+// function submitEditedTask(e) {
+//   const btnWrapper = e.target.closest('.form--submit')
+//   const task = btnWrapper.previousSibling
+//   const inputTitle = task.querySelector('input')
+//   const inputDate = task.querySelector('[type="date"]')
+//   editTask(container, task.dataset.project, getIndex(container, currentProject,task.dataset.index), inputTitle.value, inputDate.value)
+//   displayTaskToDOM(container, currentProject)
+// }
+
+// function cancelEdit() {
+//   displayTaskToDOM(container, currentProject)
+// }

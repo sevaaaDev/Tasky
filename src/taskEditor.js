@@ -6,20 +6,11 @@ export function checklist(container, projectIndex, taskIndex) {
   container[projectIndex].task[taskIndex].checklist = true
 }
 
-export function editTask(container, projectIndex, taskIndex, name, description, dueDate, priority) {
+export function editTask(container, projectIndex, taskIndex, name, dueDate) {
   container[projectIndex].task[taskIndex].name = name
-  container[projectIndex].task[taskIndex].description = description
-  container[projectIndex].task[taskIndex].dueDate = dueDate
-  container[projectIndex].task[taskIndex].priority = priority
+  container[projectIndex].task[taskIndex].dueDate = new Date(dueDate)
 }
 
 export function removeTask(container, projectIndex, taskIndex) {
-  let index
-  for (let elem of container[projectIndex].task) {
-    if (elem.oriIndex === +taskIndex) {
-      index = container[projectIndex].task.indexOf(elem)
-    }
-  }
-  console.log(index)
-  container[projectIndex].task.splice(index, 1)
-}
+  container[projectIndex].task.splice(taskIndex, 1)
+} 
