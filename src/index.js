@@ -87,8 +87,9 @@ function formTask(e) {
 createNewProject(container, "ReactJS");
 
 function selected(e) {
-  if (currentProject === e.target.dataset.index) return;
-  currentProject = e.target.dataset.index;
+  let projectIndex = getProjectIndex(container, e.target.dataset.index)
+  if (currentProject === projectIndex) return;
+  currentProject = projectIndex;
   highlightSelected(e);
   console.log(container)
   console.log(currentProject);
