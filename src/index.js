@@ -19,6 +19,8 @@ import { showFormProject, cancelAdd } from "./displayController/addTaskOrProject
 import { checklistTaskDOM, removeTaskDOM, editTaskDOM } from "./displayController/editTask.js";
 import { highlightSelected } from "./displayController/displayBehavior.js";
 import { filterToday, filter7days } from "./taskFilter.js";
+import { removeProject } from "./projectEditor.js";
+import { removeProjectDOM } from "./displayController/editProject.js";
 
 function addGlobalEventListener(type, selector, callback) {
   document.addEventListener(type, (e) => {
@@ -48,6 +50,7 @@ addGlobalEventListener('click', ".button--delete img", removeTheTask)
 addGlobalEventListener('click', '.button--edit img', editTheTask)
 addGlobalEventListener('click', "main .main--task-container .button--check", submitEditedTask)
 addGlobalEventListener('click', "main .main--task-container .button--x", cancelEdit)
+addGlobalEventListener('click', '.btn--delete-project', removeTheProject)
 
 let container = [];
 let currentProject = 1;
@@ -82,11 +85,14 @@ function formTask(e) {
 
 createNewProject(container, "ReactJS");
 
-function selected(e) {
+function selected(e, all) {
   let projectIndex = getProjectIndex(container, e.target.dataset.index)
+  if (all !== undefined) {
+    projectIndex = all
+  }
   if (currentProject === projectIndex) return;
   currentProject = projectIndex;
-  highlightSelected(e);
+  highlightSelected(e, all);
   console.log(container)
   console.log(currentProject);
   cancelAdd('task')
@@ -125,4 +131,11 @@ function submitEditedTask(e) {
 
 function cancelEdit() {
   displayTaskToDOM(container, currentProject)
+}
+
+function removeTheProject(e) {
+  let project = e.target.closest('.project')
+  removeProject(container, getProjectIndex(container, project.dataset.index))
+  removeProjectDOM(project.dataset.index)
+  selected(e, 'all')
 }
