@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "watch": "webpack --watch",
-    "build": "webpack"
+    "build": "webpack",
+    "pages": "git subtree push --prefix dist origin gh-pages"
   },
   "keywords": [],
   "author": "",
