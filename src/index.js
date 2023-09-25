@@ -17,7 +17,7 @@ import { displayTaskToDOM } from "./displayController/displayTask.js";
 import { displayProjectToDOM } from "./displayController/displayProject.js";
 import { showFormProject, cancelAdd } from "./displayController/addTaskOrProject.js";
 import { checklistTaskDOM, removeTaskDOM, editTaskDOM } from "./displayController/editTask.js";
-import { changeCategoryHeading, highlightSelected } from "./displayController/displayBehavior.js";
+import { changeCategoryHeading, highlightSelected, toggleNavBar } from "./displayController/displayBehavior.js";
 import { filterToday, filter7days } from "./taskFilter.js";
 import { removeProject } from "./projectEditor.js";
 import { removeProjectDOM } from "./displayController/editProject.js";
@@ -51,6 +51,7 @@ addGlobalEventListener('click', '.button--edit img', editTheTask)
 addGlobalEventListener('click', "main .main--task-container .button--check", submitEditedTask)
 addGlobalEventListener('click', "main .main--task-container .button--x", cancelEdit)
 addGlobalEventListener('click', '.btn--delete-project', removeTheProject)
+addGlobalEventListener('click', '.hamburger', toggleNavBar)
 
 let container = [];
 let currentProject = 0;

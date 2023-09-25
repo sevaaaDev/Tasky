@@ -48,3 +48,12 @@ export function changeCategoryHeading(container, projectIndex) {
   }
   heading.innerText = container[projectIndex].name
 }
+
+export function toggleNavBar() {
+  const nav = document.querySelector('nav')
+  if (!nav.classList.contains('__invisible')) {
+    nav.classList.add('__invisible')
+  } else {
+    nav.removeAttribute('class')
+  }
+}
