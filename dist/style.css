@@ -79,7 +79,7 @@ svg {
 }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
 }
 
 header {
@@ -158,6 +158,7 @@ nav .nav--add-project-container .button--add-project {
 main {
   grid-column: 2 / 3;
   background-color: var(--secondary-clr);
+  height: calc(100vh - 81.6px);
 }
 
 main h2 {
