@@ -12,14 +12,14 @@
     <header>
       <div class="header--wrapper">
         <h1>Tasky</h1>
-        <i data-feather="menu"></i>
+        <img src="icons/menu.svg" alt="" class="hamburger">
       </div>
     </header>
     <nav>
       <div class="nav--filter-container">
-        <div class="button--all-tasks selected" data-index="All Tasks"><i data-feather="home"></i> All Tasks</div>
-        <div class="button--today-tasks" data-index="Today Tasks"><i data-feather="calendar"></i>Today</div>
-        <div class="button--thisweek-tasks" data-index="This Week Tasks"><i data-feather="calendar"></i>Next 7 Days</div>
+        <div class="button--all-tasks selected" data-index="All Tasks"><img src="icons/home.svg" alt="">All Tasks</div>
+        <div class="button--today-tasks" data-index="Today Tasks"><img src="icons/calendar.svg" alt="">Today</div>
+        <div class="button--thisweek-tasks" data-index="This Week Tasks"><img src="icons/calendar.svg" alt="">Next 7 Days</div>
       </div>
       <h3>Projects</h3>
       <div class="nav--project-container">
@@ -27,11 +27,11 @@
       <div class="nav--add-project-container">
         <form class="form--add-project__invisible">
           <input type="text" name="title" id="project-title" placeholder="Project Name">
-          <button type="button" class="button--check"><i data-feather="check"></i></button>
-          <button type="button" class="button--x"><i data-feather="x"></i></button>
+          <button type="button" class="button--check"><img src="icons/check.svg" alt=""></button>
+          <button type="button" class="button--x"><img src="icons/x.svg" alt=""></button>
         </form>
         <div class="button--add-project">
-          <i data-feather="plus"></i>
+          <img src="icons/plus.svg" alt="">
           Add Project
         </div>
       </div>
@@ -47,19 +47,16 @@
           <label for="date">Due date</label>
           <input type="date" name="date" id="date">
           <div class="form--submit">
-            <button type="button" class="button--check"><i data-feather="check"></i></button>
-            <button type="button" class="button--x"><i data-feather="x"></i></button>
+            <button type="button" class="button--check"><img src="icons/check.svg" alt=""></button>
+            <button type="button" class="button--x"><img src="icons/x.svg" alt=""></button>
           </div>
         </form>
         <div class="button--add-task button--add-task__invisible">
-          <i data-feather="plus"></i>
+          <img src="icons/plus.svg" alt="">
           Add Task
         </div>
       </div>
     </main>
     <footer></footer>
-    <script>
-      feather.replace();
-    </script>
   </body>
 </html>
