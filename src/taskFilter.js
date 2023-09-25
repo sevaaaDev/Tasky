@@ -11,7 +11,7 @@ export function filterToday(container) {
 }
 
 function compareTodayDate(task) {
-  if (isToday(task.dueDate)) {
+  if (isToday(new Date(task.dueDate))) {
     return true
   }
   return false
@@ -32,7 +32,7 @@ function compare7DayDate(task) {
     start: addDays(startOfToday(), 1),
     end: addDays(startOfToday(), 7)
   }
-  if (isWithinInterval(task.dueDate, interval)) {
+  if (isWithinInterval(new Date(task.dueDate), interval)) {
     return true
   }
   return false

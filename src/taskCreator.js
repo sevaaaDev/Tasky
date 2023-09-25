@@ -16,7 +16,7 @@ export function createTask(
 ) {
   let task = {
     name,
-    dueDate: new Date(dueDate),
+    dueDate: dueDate,
     checklist: false,
     project: container[projectIndex].ID,
     ID: generateID()
