@@ -17,7 +17,7 @@ import { displayTaskToDOM } from "./displayController/displayTask.js";
 import { displayProjectToDOM } from "./displayController/displayProject.js";
 import { showFormProject, cancelAdd } from "./displayController/addTaskOrProject.js";
 import { checklistTaskDOM, removeTaskDOM, editTaskDOM } from "./displayController/editTask.js";
-import { highlightSelected } from "./displayController/displayBehavior.js";
+import { changeCategoryHeading, highlightSelected } from "./displayController/displayBehavior.js";
 import { filterToday, filter7days } from "./taskFilter.js";
 import { removeProject } from "./projectEditor.js";
 import { removeProjectDOM } from "./displayController/editProject.js";
@@ -54,6 +54,7 @@ addGlobalEventListener('click', '.btn--delete-project', removeTheProject)
 
 let container = [];
 let currentProject = 1;
+selected(undefined, 'All Tasks')
 
 function createNewProject(container, name) {
   createProject(container, name);
@@ -83,19 +84,21 @@ function formTask(e) {
   cancelAdd('task');
 }
 
-createNewProject(container, "ReactJS");
+createNewProject(container, "Study");
 
-function selected(e, all) {
-  let projectIndex = getProjectIndex(container, e.target.dataset.index)
-  if (all !== undefined) {
-    projectIndex = all
+function selected(e, custom) {
+  let projectIndex = getProjectIndex(container,custom)
+  if (e !== undefined) {
+    projectIndex = getProjectIndex(container, e.target.dataset.index)
   }
   if (currentProject === projectIndex) return;
   currentProject = projectIndex;
-  highlightSelected(e, all);
+  highlightSelected(e, custom);
+  console.log(projectIndex)
   console.log(container)
   console.log(currentProject);
   cancelAdd('task')
+  changeCategoryHeading(container, currentProject)
   displayTaskToDOM(container, currentProject);
 }
 
@@ -135,7 +138,13 @@ function cancelEdit() {
 
 function removeTheProject(e) {
   let project = e.target.closest('.project')
-  removeProject(container, getProjectIndex(container, project.dataset.index))
+  let projectIndex = getProjectIndex(container, project.dataset.index)
+  removeProject(container, projectIndex)
   removeProjectDOM(project.dataset.index)
-  selected(e, 'all')
+  console.log(getProjectIndex(container, project.dataset.index))
+  if (projectIndex != currentProject) {
+    return
+  }
+  console.log('exec')
+  selected(undefined, 'All Tasks')
 }
