@@ -80,6 +80,7 @@ svg {
 
 body {
   min-height: 100vh;
+  background-color: var(--secondary-clr);
 }
 
 header {
@@ -262,7 +263,7 @@ main .form--add-task input {
     padding: 0 1rem;
   }
 
-  .header--wrapper svg {
+  .header--wrapper img {
     display: none;
   }
 }
