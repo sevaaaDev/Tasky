@@ -13,7 +13,7 @@ export function displayTaskToDOM(container, projectIndex) {
     type: 'delete',
     icon: 'x.svg'
   },]
-  if (projectIndex === 'all') {
+  if (projectIndex === 'All Tasks') {
     displayAllTask(container, buttons)
     disableAddTask()
     return
