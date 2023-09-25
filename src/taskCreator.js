@@ -36,7 +36,7 @@ export function getTaskIndex(container, projectIndex, taskID) {
 export function getProjectIndex(container, projectID) {
   for (let elem of container) {
     if (elem.ID === +projectID) {
-      return container.indexOf(elem)
+      return +container.indexOf(elem)
     }
   }
   console.log('Something is wrong')
