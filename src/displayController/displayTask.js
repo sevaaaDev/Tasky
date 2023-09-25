@@ -49,7 +49,6 @@ export function displayTaskToDOM(container, projectIndex) {
     dueDate.classList.add('task--date')
     taskElement.setAttribute("data-index", task["ID"]);
     taskElement.setAttribute("data-project", task["project"]);
-    console.log(task.dueDate)
     taskContainer.append(taskElement);
     const btnEdit = document.querySelector(`main div[data-project="${task.project}"][data-index="${task.ID}"] .button--edit`)
     const btnStatusIcon = document.querySelector(`main div[data-project="${task.project}"][data-index="${task.ID}"] .button--status img`)

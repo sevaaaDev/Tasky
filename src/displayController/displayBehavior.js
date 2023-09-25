@@ -42,11 +42,9 @@ function resetHighlighting(nodelist) {
 
 export function changeCategoryHeading(container, projectIndex) {
   const heading = document.querySelector('main h2') 
-  console.log(typeof projectIndex)
   if (typeof projectIndex !== 'number') {
     heading.innerText = projectIndex
     return
   }
   heading.innerText = container[projectIndex].name
-  console.log(container[projectIndex].name)
 }

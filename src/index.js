@@ -85,7 +85,6 @@ function formTask(e) {
     inputDate.style.outline = 'solid red'
     return
   }
-  console.log(inputDate, inputTitle)
   createTask(container, currentProject, inputTitle.value, inputDate.value);
   localStorage.setItem('container',JSON.stringify(container))
   displayTaskToDOM(container, currentProject)
@@ -101,9 +100,6 @@ function selected(e, custom) {
   if (currentProject === projectIndex) return;
   currentProject = projectIndex;
   highlightSelected(e, custom);
-  console.log(projectIndex)
-  console.log(container)
-  console.log(currentProject);
   cancelAdd('task')
   changeCategoryHeading(container, currentProject)
   displayTaskToDOM(container, currentProject);
@@ -113,20 +109,18 @@ function checklistTheTask(e) {
   const task = e.target.closest('.task')
   checklist(container,getProjectIndex(container, task.dataset.project), getTaskIndex(container, getProjectIndex(container, task.dataset.project), task.dataset.index))
   checklistTaskDOM(task.dataset.project, task.dataset.index)
-  console.log(container)
+  localStorage.setItem('container',JSON.stringify(container))
 }
 
 function removeTheTask(e) {
   const task = e.target.closest('.task')
-  console.log(task)
   removeTask(container,getProjectIndex(container, task.dataset.project), getTaskIndex(container, getProjectIndex(container, task.dataset.project), task.dataset.index))
   removeTaskDOM(task.dataset.project, task.dataset.index)
-  console.log(container)
+  localStorage.setItem('container',JSON.stringify(container))
 }
 
 function editTheTask(e) {
   const task = e.target.closest('.task')
-  console.log(task)
   editTaskDOM(container, currentProject, getProjectIndex(container, task.dataset.project), getTaskIndex(container, getProjectIndex(container, task.dataset.project), task.dataset.index), task.dataset.project, task.dataset.index)
 }
 
@@ -137,6 +131,7 @@ function submitEditedTask(e) {
   const inputDate = task.querySelector('[type="date"]')
   editTask(container, getProjectIndex(container, task.dataset.project) , getTaskIndex(container, getProjectIndex(container, task.dataset.project) ,task.dataset.index), inputTitle.value, inputDate.value)
   displayTaskToDOM(container, currentProject)
+  localStorage.setItem('container',JSON.stringify(container))
 }
 
 function cancelEdit() {
@@ -148,10 +143,10 @@ function removeTheProject(e) {
   let projectIndex = getProjectIndex(container, project.dataset.index)
   removeProject(container, projectIndex)
   removeProjectDOM(project.dataset.index)
-  console.log(getProjectIndex(container, project.dataset.index))
   if (projectIndex != currentProject) {
+    displayTaskToDOM(container, currentProject)
     return
   }
-  console.log('exec')
+  localStorage.setItem('container',JSON.stringify(container))
   selected(undefined, 'All Tasks')
 }

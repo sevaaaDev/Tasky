@@ -11,7 +11,7 @@ export function editTaskDOM(container, currentProject, projectIndex, taskIndex, 
   inputWrapper.classList.add('task--info-wrapper')
   inputTitle.value = title.innerText
   inputDate.setAttribute('type', 'date')
-  inputDate.value = lightFormat(container[projectIndex].task[taskIndex].dueDate, 'yyyy-MM-dd')
+  inputDate.value = lightFormat(new Date(container[projectIndex].task[taskIndex].dueDate), 'yyyy-MM-dd')
   title.remove()
   inputWrapper.append(inputTitle, inputDate)
   task.insertBefore(inputWrapper, date.parentElement)

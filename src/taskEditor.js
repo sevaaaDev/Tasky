@@ -8,7 +8,7 @@ export function checklist(container, projectIndex, taskIndex) {
 
 export function editTask(container, projectIndex, taskIndex, name, dueDate) {
   container[projectIndex].task[taskIndex].name = name
-  container[projectIndex].task[taskIndex].dueDate = new Date(dueDate)
+  container[projectIndex].task[taskIndex].dueDate = dueDate
 }
 
 export function removeTask(container, projectIndex, taskIndex) {

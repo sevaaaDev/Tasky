@@ -6,7 +6,6 @@ export function filterToday(container) {
     let tempArray = project.task.filter(compareTodayDate);
     filtered.push(tempArray);
   }
-  console.log(filtered);
   return filtered
 }
 
@@ -23,7 +22,6 @@ export function filter7days(container) {
     let tempArray = project.task.filter(compare7DayDate);
     filtered.push(tempArray);
   }
-  console.log(filtered);
   return filtered
 }
 
