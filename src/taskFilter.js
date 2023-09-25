@@ -1,3 +1,5 @@
+import { addDays, isToday, isWithinInterval, startOfToday } from "date-fns";
+
 export function filterToday(container) {
   let filtered = [];
   for (let project of container) {
@@ -5,11 +7,14 @@ export function filterToday(container) {
     filtered.push(tempArray);
   }
   console.log(filtered);
+  return filtered
 }
 
 function compareTodayDate(task) {
-  const date = new Date().getDate();
-  return task.dueDate === date;
+  if (isToday(task.dueDate)) {
+    return true
+  }
+  return false
 }
 
 export function filter7days(container) {
@@ -19,9 +24,16 @@ export function filter7days(container) {
     filtered.push(tempArray);
   }
   console.log(filtered);
+  return filtered
 }
 
 function compare7DayDate(task) {
-  const date = new Date().getDate();
-  return task.dueDate < date + 7 && todo.dueDate > date;
+  let interval = {
+    start: addDays(startOfToday(), 1),
+    end: addDays(startOfToday(), 7)
+  }
+  if (isWithinInterval(task.dueDate, interval)) {
+    return true
+  }
+  return false
 }
