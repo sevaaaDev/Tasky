@@ -17,7 +17,7 @@ export function highlightSelected(e, all) {
   resetHighlighting(btnFilter);
   if (all !== undefined) {
     for (let btn of btnFilter) {
-      if (btn.dataset.index === 'all') {
+      if (btn.dataset.index === 'All Tasks') {
         btn.classList.add('selected')
         return
       }
@@ -38,4 +38,15 @@ function resetHighlighting(nodelist) {
   for (let elem of nodelist) {
     elem.classList.remove("selected");
   }
+}
+
+export function changeCategoryHeading(container, projectIndex) {
+  const heading = document.querySelector('main h2') 
+  console.log(typeof projectIndex)
+  if (typeof projectIndex !== 'number') {
+    heading.innerText = projectIndex
+    return
+  }
+  heading.innerText = container[projectIndex].name
+  console.log(container[projectIndex].name)
 }
