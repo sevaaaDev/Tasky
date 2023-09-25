@@ -53,11 +53,18 @@ addGlobalEventListener('click', "main .main--task-container .button--x", cancelE
 addGlobalEventListener('click', '.btn--delete-project', removeTheProject)
 
 let container = [];
-let currentProject = 1;
+let currentProject = 0;
+if (!localStorage.getItem('container')) {
+  createNewProject(container, "Study");
+} else {
+  container = JSON.parse(localStorage.getItem('container'))
+  displayProjectToDOM(container)
+}
 selected(undefined, 'All Tasks')
 
 function createNewProject(container, name) {
   createProject(container, name);
+  localStorage.setItem('container',JSON.stringify(container))
   displayProjectToDOM(container);
 }
 
@@ -80,11 +87,11 @@ function formTask(e) {
   }
   console.log(inputDate, inputTitle)
   createTask(container, currentProject, inputTitle.value, inputDate.value);
+  localStorage.setItem('container',JSON.stringify(container))
   displayTaskToDOM(container, currentProject)
   cancelAdd('task');
 }
 
-createNewProject(container, "Study");
 
 function selected(e, custom) {
   let projectIndex = getProjectIndex(container,custom)
