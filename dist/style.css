@@ -191,11 +191,8 @@ main .main--task-container div.task .task--info-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  overflow-wrap: anywhere;
 }
-
-/* main .main--task-container div.task .task--title {
-  margin-right: auto;
-} */
 
 .checked {
   text-decoration: line-through;
