@@ -1,24 +1,10 @@
-import { createProject, createTask, getIndex, getProjectIndex, getTaskIndex } from "./taskCreator.js";
-import { checklist, editTask, editTodo, removeTask, removeTodo } from "./taskEditor.js";
-// import {
-//   selectDOM,
-//   displayProjectToDOM,
-//   highlightSelected,
-//   showFormProject,
-//   cancelAdd,
-//   displayTaskToDOM,
-//   checklistTaskDOM,
-//   removeTaskDOM,
-//   editTaskDOM,
-//   hideButtonSubmit,
-//   applyEditedTaskDOM,
-// } from "./displayController/displayController.js";
+import { createProject, createTask, getProjectIndex, getTaskIndex } from "./taskCreator.js";
+import { checklist, editTask, removeTask } from "./taskEditor.js";
 import { displayTaskToDOM } from "./displayController/displayTask.js";
 import { displayProjectToDOM } from "./displayController/displayProject.js";
 import { showFormProject, cancelAdd } from "./displayController/addTaskOrProject.js";
 import { checklistTaskDOM, removeTaskDOM, editTaskDOM } from "./displayController/editTask.js";
 import { changeCategoryHeading, highlightSelected, toggleNavBar } from "./displayController/displayBehavior.js";
-import { filterToday, filter7days } from "./taskFilter.js";
 import { removeProject } from "./projectEditor.js";
 import { removeProjectDOM } from "./displayController/editProject.js";
 
@@ -55,6 +41,11 @@ addGlobalEventListener('click', '.hamburger', toggleNavBar)
 
 let container = [];
 let currentProject = 0;
+
+if (window.screen.width > 768) {
+  toggleNavBar()
+}
+
 if (!localStorage.getItem('container')) {
   createNewProject(container, "Study");
 } else {
