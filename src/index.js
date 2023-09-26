@@ -7,6 +7,18 @@ import { checklistTaskDOM, removeTaskDOM, editTaskDOM } from "./displayControlle
 import { changeCategoryHeading, highlightSelected, toggleNavBar } from "./displayController/displayBehavior.js";
 import { removeProject } from "./projectEditor.js";
 import { removeProjectDOM } from "./displayController/editProject.js";
+import { displayMenuToDOM, hideMenu } from "./displayController/displayMenu.js";
+
+
+let container = [];
+let currentProject = 0;
+if (!localStorage.getItem('container')) {
+  createNewProject(container, "Study");
+} else {
+  container = JSON.parse(localStorage.getItem('container'))
+  displayProjectToDOM(container)
+}
+selected(undefined, 'All Tasks')
 
 function addGlobalEventListener(type, selector, callback) {
   document.addEventListener(type, (e) => {
@@ -38,21 +50,22 @@ addGlobalEventListener('click', "main .main--task-container .button--check", sub
 addGlobalEventListener('click', "main .main--task-container .button--x", cancelEdit)
 addGlobalEventListener('click', '.btn--delete-project', removeTheProject)
 addGlobalEventListener('click', '.hamburger', toggleNavBar)
-
-let container = [];
-let currentProject = 0;
+addGlobalEventListener('click', '.menu--container img', displayMenu)
+document.addEventListener('click', (e) => {
+  if (e.target.matches('.menu--container img')) {
+    return
+  }
+  hideMenu()
+})
 
 if (window.screen.width > 768) {
   toggleNavBar()
 }
 
-if (!localStorage.getItem('container')) {
-  createNewProject(container, "Study");
-} else {
-  container = JSON.parse(localStorage.getItem('container'))
-  displayProjectToDOM(container)
+function displayMenu(e) {
+  let menuContainer = e.target.closest('.menu--container')
+  displayMenuToDOM(menuContainer, container, currentProject)
 }
-selected(undefined, 'All Tasks')
 
 function createNewProject(container, name) {
   createProject(container, name);
