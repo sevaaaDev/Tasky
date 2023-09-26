@@ -71,12 +71,6 @@ function formTask(e) {
   e.preventDefault();
   const inputTitle = document.querySelector("main form input");
   const inputDate = document.querySelector('main form input[type="date"]');
-  inputDate.removeAttribute('style')
-  if (inputDate.value === '') {
-    inputDate.focus()
-    inputDate.style.outline = 'solid red'
-    return
-  }
   createTask(container, currentProject, inputTitle.value, inputDate.value);
   localStorage.setItem('container',JSON.stringify(container))
   displayTaskToDOM(container, currentProject)
