@@ -45,7 +45,10 @@ export function displayTaskToDOM(container, projectIndex) {
     title.innerText = task.name
     title.classList.add('task--title')
     const dueDate = document.createElement('p')
-    dueDate.innerText = `Due ${format(new Date(task.dueDate), 'd MMM yyyy')}`
+    dueDate.innerText = "No due date" 
+    if (task.dueDate !== '') {
+      dueDate.innerText = `${format(new Date(task.dueDate), 'd MMM yyyy')}`
+    }
     dueDate.classList.add('task--date')
     taskElement.setAttribute("data-index", task["ID"]);
     taskElement.setAttribute("data-project", task["project"]);
@@ -84,7 +87,10 @@ function displayAllTask(container, buttons) {
     title.innerText = task.name
     title.classList.add('task--title')
     const dueDate = document.createElement('p')
-    dueDate.innerText = `Due ${format(new Date(task.dueDate), 'd MMM yyyy')}`
+    dueDate.innerText = "No due date" 
+    if (task.dueDate !== '') {
+      dueDate.innerText = `${format(new Date(task.dueDate), 'd MMM yyyy')}`
+    }
     dueDate.classList.add('task--date')
     taskElement.setAttribute("data-index", task["ID"]);
     taskElement.setAttribute("data-project", task["project"]);
@@ -128,7 +134,10 @@ function displayFilteredTask(container, buttons, projectIndex) {
     title.innerText = task.name
     title.classList.add('task--title')
     const dueDate = document.createElement('p')
-    dueDate.innerText = `Due ${format(new Date(task.dueDate), 'd MMM yyyy')}`
+    dueDate.innerText = "No due date" 
+    if (task.dueDate !== '') {
+      dueDate.innerText = `${format(new Date(task.dueDate), 'd MMM yyyy')}`
+    }
     dueDate.classList.add('task--date')
     taskElement.setAttribute("data-index", task["ID"]);
     taskElement.setAttribute("data-project", task["project"]);
