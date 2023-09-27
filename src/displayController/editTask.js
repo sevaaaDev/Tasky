@@ -1,10 +1,12 @@
 import lightFormat from "date-fns/lightFormat"
 import { displayTaskToDOM } from "./displayTask"
+import { disableAddTask } from "./displayBehavior"
 export function editTaskDOM(container, currentProject, projectIndex, taskIndex, projectID, taskID) {
   let lvl = ['Low', "Medium", 'High']
   displayTaskToDOM(container,currentProject)
   const task = document.querySelector(`[data-project="${projectID}"][data-index="${taskID}"]`)
   const ellipsis = task.querySelector('.menu--container')
+  const btnStatus = task.querySelector('.button--status')
   const title = task.querySelector('.task--title')
   const date = task.querySelector('.task--date')
   const inputWrapper = document.createElement('div')
@@ -29,11 +31,15 @@ export function editTaskDOM(container, currentProject, projectIndex, taskIndex, 
     inputDate.value = lightFormat(new Date(container[projectIndex].task[taskIndex].dueDate), 'yyyy-MM-dd')
   }
   title.remove()
-  inputWrapper.append(inputTitle, inputDate,priority, inputDesc)
+  inputWrapper.append(inputTitle, inputDesc, inputDate, priority)
   task.insertBefore(inputWrapper, date.parentElement)
   date.parentElement.remove()
   inputTitle.focus()
   ellipsis.remove()
+  btnStatus.remove()
+  task.classList.add('task-flex')
+  task.classList.remove('task')
+  disableAddTask()
   showButtonSubmit(task)
 }
 
