@@ -45,7 +45,7 @@ addGlobalEventListener("click", "main form .button--x", cancelAdd.bind(null, 'ta
 addGlobalEventListener("click", "main form .button--x svg", cancelAdd.bind(null, 'task'));
 addGlobalEventListener('click', '.button--status img', checklistTheTask)
 addGlobalEventListener('click', ".menu--delete", removeTheTask)
-addGlobalEventListener('click', '.button--edit img', editTheTask)
+addGlobalEventListener('click', '.menu--edit', editTheTask)
 addGlobalEventListener('click', "main .main--task-container .button--check", submitEditedTask)
 addGlobalEventListener('click', "main .main--task-container .button--x", cancelEdit)
 addGlobalEventListener('click', '.btn--delete-project', removeTheProject)
@@ -87,9 +87,12 @@ function formTask(e) {
   e.preventDefault();
   const inputTitle = document.querySelector("main form input");
   const inputDate = document.querySelector('main form input[type="date"]');
-  createTask(container, currentProject, inputTitle.value, inputDate.value);
+  const inputDesc = document.querySelector('main form textarea')
+  const priority = document.querySelector('main form select')
+  createTask(container, currentProject, inputTitle.value, inputDate.value, inputDesc.value, priority.value);
   localStorage.setItem('container',JSON.stringify(container))
   displayTaskToDOM(container, currentProject)
+  console.log(container)
   cancelAdd('task');
 }
 
@@ -118,8 +121,7 @@ function removeTheTask(e) {
   console.log('got?')
   const task = e.target.closest('.task')
   removeTask(container,getProjectIndex(container, task.dataset.project), getTaskIndex(container, getProjectIndex(container, task.dataset.project), task.dataset.index))
-  // removeTaskDOM(task.dataset.project, task.dataset.index)
-  displayTaskToDOM(container, currentProject)
+  displayTaskToDOM(container,currentProject)
   localStorage.setItem('container',JSON.stringify(container))
 }
 
@@ -133,7 +135,9 @@ function submitEditedTask(e) {
   const task = btnWrapper.previousSibling
   const inputTitle = task.querySelector('input')
   const inputDate = task.querySelector('[type="date"]')
-  editTask(container, getProjectIndex(container, task.dataset.project) , getTaskIndex(container, getProjectIndex(container, task.dataset.project) ,task.dataset.index), inputTitle.value, inputDate.value)
+  const inputDesc = task.querySelector('textarea')
+  const priority = task.querySelector('select')
+  editTask(container, getProjectIndex(container, task.dataset.project) , getTaskIndex(container, getProjectIndex(container, task.dataset.project) ,task.dataset.index), inputTitle.value, inputDate.value, inputDesc.value, priority.value)
   displayTaskToDOM(container, currentProject)
   localStorage.setItem('container',JSON.stringify(container))
 }
