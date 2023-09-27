@@ -6,9 +6,11 @@ export function checklist(container, projectIndex, taskIndex) {
   container[projectIndex].task[taskIndex].checklist = true
 }
 
-export function editTask(container, projectIndex, taskIndex, name, dueDate) {
+export function editTask(container, projectIndex, taskIndex, name, dueDate, desc, priority) {
   container[projectIndex].task[taskIndex].name = name
   container[projectIndex].task[taskIndex].dueDate = dueDate
+  container[projectIndex].task[taskIndex].desc = desc
+  container[projectIndex].task[taskIndex].priority = priority
 }
 
 export function removeTask(container, projectIndex, taskIndex) {
