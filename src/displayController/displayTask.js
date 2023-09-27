@@ -38,11 +38,17 @@ function displayTask(container) {
     type: 'ellipsis',
     icon: 'more-vertical.svg'
   }]
+  const priority = {
+    Low: 'green',
+    Medium: "yellow",
+    High: "red",
+  }
   resetTaskDisplay();
   const taskContainer = document.querySelector(".main--task-container");
   for (let task of container) {
     const taskElement = document.createElement("div");
     taskElement.classList.add("task");
+    taskElement.style.borderLeft = `5px solid ${priority[task.priority]}`
     const btn = document.createElement('button') 
     btn.setAttribute('type', 'button')
     btn.classList.add(`button--${buttons[0].type}`)
