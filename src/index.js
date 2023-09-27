@@ -68,6 +68,9 @@ if (window.screen.width > 768) {
 function displayMenu(e) {
   let menuContainer = e.target.closest('.menu--container')
   displayMenuToDOM(menuContainer, container, currentProject)
+  if (document.querySelector('main .form--add-task')) {
+    cancelAdd('task')
+  }
 }
 
 function createNewProject(container, name) {
