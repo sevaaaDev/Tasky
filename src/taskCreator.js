@@ -13,10 +13,14 @@ export function createTask(
   projectIndex,
   name,
   dueDate,
+  description,
+  priority
 ) {
   let task = {
     name,
     dueDate: dueDate,
+    desc: description,
+    priority: priority,
     checklist: false,
     project: container[projectIndex].ID,
     ID: generateID()
