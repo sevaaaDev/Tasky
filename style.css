@@ -194,6 +194,7 @@ main .main--task-container div.task .task--info-wrapper {
   justify-content: space-between;
   align-items: center;
   overflow-wrap: anywhere;
+  gap: .5rem;
 }
 
 main .main--task-container div.task .task--info-wrapper .task--date {
@@ -207,7 +208,8 @@ main .main--task-container div.task .task--info-wrapper .task--date {
 
 main .main--task-container .task input {
   margin-right: auto;
-  width: 75%;
+  width: 100px;
+  flex: 2 1 auto;
   background-color: rgba(0, 0, 0, 0);
   color: white;
   font-size: 1rem;
@@ -218,9 +220,15 @@ main .main--task-container .task input {
 main .main--task-container .task [type="date"] {
   margin: 0;
   font-size: 0.8rem;
-  width: 7rem;
+  width: 100px;
+  flex: 1 1 auto;
+  /* width: 7rem; */
 }
 
+textarea {
+  width: 100%;
+  resize: none;
+}
 main .main--add-task-container .button--add-task {
   display: flex;
   padding: 0.5rem;
@@ -231,7 +239,8 @@ main .main--add-task-container .button--add-task {
 }
 
 main .main--add-task-container .form--add-task {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
   border: 1px solid black;
   padding: 1rem 2rem;
 }
@@ -242,6 +251,7 @@ main .main--add-task-container .form--add-task label {
 
 main .form--submit {
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(2, 1fr);
 }
 
@@ -249,12 +259,20 @@ main .main--add-task-container .form--submit {
   margin: 0.5rem 0 0;
 }
 
-main .form--add-task input {
+main .form--add-task input, main .form--add-task select, .form--add-task textarea {
   width: 100%;
-  resize: none;
   padding: 0.2rem;
   margin: 0 0 0.5rem;
   border: 2px solid black;
+}
+
+main .form--add-task select {
+  padding: 0.38rem 0.2rem;
+}
+
+main .form--add-task div.wrapper {
+  width: 115px;
+  flex: 1 1 auto;
 }
 
 main .menu--container {
@@ -265,7 +283,7 @@ main .main--task-container img {
   cursor: pointer;
 }
 
-main .main--task-container button:hover {
+main .main--task-container .task button:hover {
   scale: 1.2;
 }
 
