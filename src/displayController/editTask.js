@@ -1,24 +1,39 @@
 import lightFormat from "date-fns/lightFormat"
 import { displayTaskToDOM } from "./displayTask"
 export function editTaskDOM(container, currentProject, projectIndex, taskIndex, projectID, taskID) {
+  let lvl = ['Low', "Medium", 'High']
   displayTaskToDOM(container,currentProject)
   const task = document.querySelector(`[data-project="${projectID}"][data-index="${taskID}"]`)
+  const ellipsis = task.querySelector('.menu--container')
   const title = task.querySelector('.task--title')
   const date = task.querySelector('.task--date')
   const inputWrapper = document.createElement('div')
   const inputTitle = document.createElement('input')
   const inputDate = document.createElement('input')
+  const inputDesc = document.createElement('textarea')
+  const priority = document.createElement('select')
+  for (let level of lvl) {
+    const option = document.createElement('option')
+    option.setAttribute('value', level)
+    option.innerText = level
+    if (container[projectIndex].task[taskIndex].priority === level) {
+      option.setAttribute('selected', true)
+    }
+    priority.append(option)
+  }
   inputWrapper.classList.add('task--info-wrapper')
   inputTitle.value = title.innerText
   inputDate.setAttribute('type', 'date')
+  inputDesc.value = container[projectIndex].task[taskIndex].desc
   if (container[projectIndex].task[taskIndex].dueDate !== '') {
     inputDate.value = lightFormat(new Date(container[projectIndex].task[taskIndex].dueDate), 'yyyy-MM-dd')
   }
   title.remove()
-  inputWrapper.append(inputTitle, inputDate)
+  inputWrapper.append(inputTitle, inputDate,priority, inputDesc)
   task.insertBefore(inputWrapper, date.parentElement)
   date.parentElement.remove()
   inputTitle.focus()
+  ellipsis.remove()
   showButtonSubmit(task)
 }
 
