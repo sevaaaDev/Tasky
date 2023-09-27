@@ -25,8 +25,10 @@ export function cancelAdd(type) {
   const btnAdd = document.querySelector(`[class*="button--add-${type}"]`);
   const input = form.querySelector("input[type='text']");
   const date = form.querySelector("input[type='date']");
+  const desc = form.querySelector('textarea')
   input.value = "";
   if (date !== null) {date.value = ''}
+  if (desc !== null) {desc.value = ''}
   form.classList.remove(`form--add-${type}`);
   btnAdd.classList.add(`button--add-${type}`);
 }
