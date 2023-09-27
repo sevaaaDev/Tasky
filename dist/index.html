@@ -43,8 +43,20 @@
         <form class="form--add-task__invisible">
           <label for="title">Title</label>
           <input type="text" name="title" id="title" required>
-          <label for="date">Due date</label>
-          <input type="date" name="date" id="date">
+          <label for="desc">Description</label>
+          <textarea id="desc"></textarea>
+          <div class="wrapper">
+            <label for="date">Due date</label>
+            <input type="date" name="date" id="date">
+          </div>
+          <div class="wrapper">
+            <label for="priority">Priority</label>
+            <select id="priority">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
           <div class="form--submit">
             <button type="button" class="button--check"><img src="icons/check.svg" alt=""></button>
             <button type="button" class="button--x"><img src="icons/x.svg" alt=""></button>
