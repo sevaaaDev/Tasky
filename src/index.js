@@ -44,7 +44,7 @@ addGlobalEventListener("submit", "main form", formTask);
 addGlobalEventListener("click", "main form .button--x", cancelAdd.bind(null, 'task'));
 addGlobalEventListener("click", "main form .button--x svg", cancelAdd.bind(null, 'task'));
 addGlobalEventListener('click', '.button--status img', checklistTheTask)
-addGlobalEventListener('click', ".button--delete img", removeTheTask)
+addGlobalEventListener('click', ".menu--delete", removeTheTask)
 addGlobalEventListener('click', '.button--edit img', editTheTask)
 addGlobalEventListener('click', "main .main--task-container .button--check", submitEditedTask)
 addGlobalEventListener('click', "main .main--task-container .button--x", cancelEdit)
@@ -55,7 +55,10 @@ document.addEventListener('click', (e) => {
   if (e.target.matches('.menu--container img')) {
     return
   }
-  hideMenu()
+  if (document.querySelector('.menu')) {
+    hideMenu()
+  }
+  return
 })
 
 if (window.screen.width > 768) {
@@ -112,9 +115,11 @@ function checklistTheTask(e) {
 }
 
 function removeTheTask(e) {
+  console.log('got?')
   const task = e.target.closest('.task')
   removeTask(container,getProjectIndex(container, task.dataset.project), getTaskIndex(container, getProjectIndex(container, task.dataset.project), task.dataset.index))
-  removeTaskDOM(task.dataset.project, task.dataset.index)
+  // removeTaskDOM(task.dataset.project, task.dataset.index)
+  displayTaskToDOM(container, currentProject)
   localStorage.setItem('container',JSON.stringify(container))
 }
 
