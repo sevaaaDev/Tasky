@@ -186,7 +186,6 @@ main .main--task-container div.task {
   margin: 0.3rem 0;
   border-left: 5px solid red;
   border: 1px solid black;
-  /* position: relative; */
 }
 
 main .main--task-container div.task .task--info-wrapper {
@@ -260,6 +259,14 @@ main .form--add-task input {
 
 main .menu--container {
   position: relative;
+}
+
+main .main--task-container img {
+  cursor: pointer;
+}
+
+main .main--task-container button:hover {
+  scale: 1.2;
 }
 
 main .menu {
