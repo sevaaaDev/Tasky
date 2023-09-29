@@ -128,6 +128,7 @@ nav .nav--project-container div {
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 nav .nav--filter-container div.selected,
@@ -192,7 +193,8 @@ main .main--task-container div.task {
   padding: 0.5rem;
   margin: 0.3rem 0;
   border-left: 5px solid red;
-  border: 1px solid black;
+  background-color: var(--tertiary-clr);
+  border-radius: 5px;
 }
 
 main .task-flex {
@@ -214,9 +216,10 @@ main .main--task-container .task--info-wrapper {
 }
 
 main .main--task-container .task--info-wrapper .task--date {
-  border: 1px solid black;
   font-size: 0.8rem;
   padding: 0.3rem;
+  border-radius: 5px;
+  background-color: var(--secondary-clr);
 }
 .checked {
   text-decoration: line-through;
@@ -262,8 +265,9 @@ main .main--add-task-container .button--add-task {
 main .main--add-task-container .form--add-task {
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid black;
   padding: 1rem 2rem;
+  border-radius: 5px;
+  background-color: var(--tertiary-clr);
 }
 
 main .main--add-task-container .form--add-task label {
