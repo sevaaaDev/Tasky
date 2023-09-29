@@ -8,10 +8,11 @@ export function displayMenuToDOM(menuContainer) {
     hideMenu()
   }
   const menu = document.createElement('div')
-  let className = [{
-    clas: 'menu--details',
-    text: "Details"
-  },{
+  let className = [
+  // {
+    // clas: 'menu--details',
+    // text: "Details"  },
+  {
     clas: 'menu--edit',
     text: "Edit"
   },{
