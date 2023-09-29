@@ -1,6 +1,4 @@
-import { displayTaskToDOM } from "./displayTask"
-
-export function displayMenuToDOM(menuContainer, container, projectIndex) {
+export function displayMenuToDOM(menuContainer) {
   if (document.querySelector('.menu') !== null) {
     const currentMenu = document.querySelector('.menu')
     if (currentMenu.closest('.menu--container') === menuContainer) {
@@ -30,7 +28,7 @@ export function displayMenuToDOM(menuContainer, container, projectIndex) {
   menuContainer.append(menu);
 }
 
-export function hideMenu(container, projectIndex) {
+export function hideMenu() {
   const menu = document.querySelector('.menu')
   menu.remove()
 }
