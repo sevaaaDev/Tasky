@@ -1,6 +1,6 @@
 import { resetProjectDisplay } from "./displayReset";
 
-export function displayProjectToDOM(container, projectIndex) {
+export function displayProjectToDOM(container) {
   resetProjectDisplay()
   const projectContainer = document.querySelector(".nav--project-container");
   for (let project of container) {
