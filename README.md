@@ -6,4 +6,4 @@ Feature
 - Edit & Delete Todo
 - Local storage(so your todo wont go away)
 
-[Demo](https://www.sevaaadev.github.io)
+[Demo](https://www.sevaaadev.github.io/Tasky)
