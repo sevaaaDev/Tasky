@@ -1,15 +1,23 @@
 import PropTypes from "prop-types";
-function GroupItem({ group, handleDeleteCurry }) {
+function GroupItem({
+  groupName,
+  handleDeleteCurry,
+  handleEditCurry,
+  setGroupCurry,
+}) {
   return (
-    <li>
-      {group} <button onClick={handleDeleteCurry(group)}>delete</button>
+    <li onClick={setGroupCurry(groupName)}>
+      {groupName} <button onClick={handleDeleteCurry(groupName)}>Delete</button>
+      <button onClick={handleEditCurry(groupName)}>Edit</button>
     </li>
   );
 }
 
 GroupItem.propTypes = {
-  group: PropTypes.string,
-  handleDeleteCurry: PropTypes.func,
+  groupName: PropTypes.string.isRequired,
+  handleDeleteCurry: PropTypes.func.isRequired,
+  handleEditCurry: PropTypes.func.isRequired,
+  setGroupCurry: PropTypes.func.isRequired,
 };
 
 export { GroupItem };
