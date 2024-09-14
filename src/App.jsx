@@ -20,7 +20,19 @@ const initItems = {
       summary: "router",
     },
   ],
-  Life: [],
+  Life: [
+    {
+      id: crypto.randomUUID(),
+      title: "Pull UP",
+
+      summary: "yes",
+    },
+    {
+      id: crypto.randomUUID(),
+      title: "Fix urself",
+      summary: "frog",
+    },
+  ],
 };
 function App() {
   const [items, setItems] = useState(initItems);
@@ -55,18 +67,39 @@ function App() {
     });
     setItems(newItems);
   }
+
+  function editTodoCurry(todoItem) {
+    return () => {};
+  }
+
+  function changeGroupCurry(groupName) {
+    return () => setCurrentGroup(groupName);
+  }
+  // TODO: form modal
+  // TODO: create List component
   return (
     <>
       <Form submit={addTodo} label="Todo"></Form>
       <TodoList>
         {currentItems.map((el) => (
-          <TodoItem key={el.id} item={el} handleDeleteCurry={deleteTodoCurry} />
+          <TodoItem
+            key={el.id}
+            item={el}
+            handleDeleteCurry={deleteTodoCurry}
+            handleEditCurry={editTodoCurry}
+          />
         ))}
       </TodoList>
       <hr />
       <TodoList>
         {listOfGroups.map((el) => (
-          <GroupItem key={el} group={el} handleDeleteCurry={deleteGroupCurry} />
+          <GroupItem
+            key={el}
+            groupName={el}
+            handleDeleteCurry={deleteGroupCurry}
+            handleEditCurry={() => {}}
+            setGroupCurry={changeGroupCurry}
+          />
         ))}
       </TodoList>
     </>
