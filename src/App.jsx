@@ -41,7 +41,8 @@ function App() {
   let listOfGroups = Object.keys(items);
 
   function deleteGroupCurry(id) {
-    return () => {
+    return (e) => {
+      e.stopPropagation();
       let { [id]: _, ...newItems } = items;
       setCurrentGroup("Default");
       setItems(newItems);
