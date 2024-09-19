@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { TodoItem } from "./components/TodoItem";
 import { TodoList } from "./components/TodoList";
 import { Form } from "./components/Form";
@@ -43,11 +43,58 @@ function getAllTodo(items) {
   return arr;
 }
 
+function reducer(state, action) {
+  let { payload, type } = action;
+  switch (type) {
+    case "todoAdd":
+      return {
+        ...state,
+        [payload.currentGroup]: state[payload.currentGroup].concat(
+          newTodo(payload.title),
+        ),
+      };
+    case "todoEdit":
+      return todoEdit(state, payload);
+    case "todoDelete":
+      return todoDelete(state, payload);
+    default:
+      return state;
+  }
+}
+function newTodo(title) {
+  return {
+    id: crypto.randomUUID(),
+    title: title,
+    summary: "",
+  };
+}
+
+function todoEdit(state, { todoId, title, currentGroup }) {
+  let newItems = { ...state };
+  newItems[currentGroup] = newItems[currentGroup].map((item) => {
+    if (item.id === todoId) {
+      item.title = title;
+    }
+    return item;
+  });
+  return newItems;
+}
+
+function todoDelete(state, { todoId, currentGroup }) {
+  // BUG: if delete on default group, it will error (bcs dont know which currentGroup)
+  let newItems = { ...state };
+  newItems[currentGroup] = newItems[currentGroup].filter(
+    (el) => el.id !== todoId,
+  );
+  return newItems;
+}
+// TODO: learn about useReducer
 function App() {
   const [items, setItems] = useState(initItems);
   const [currentGroup, setCurrentGroup] = useState("Programming"); // change it to default
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalBody, setModalBody] = useState(null);
+  const [state, dispatch] = useReducer(reducer, initItems);
   let currentItems = getAllTodo(state);
   if (currentGroup !== "Default") {
     currentItems = state[currentGroup];
@@ -63,36 +110,38 @@ function App() {
     };
   }
 
-  function deleteTodoCurry(id) {
+  function deleteTodoCurry(todoId) {
     return () => {
-      let newItems = { ...items };
-      newItems[currentGroup] = newItems[currentGroup].filter(
-        (el) => el.id !== id,
-      );
-      setItems(newItems);
+      dispatch({
+        type: "todoDelete",
+        payload: {
+          todoId,
+          currentGroup,
+        },
+      });
     };
   }
 
   function addTodo(title) {
-    let newItems = { ...items };
-    newItems[currentGroup].push({
-      id: crypto.randomUUID(),
-      title: title,
-      summary: "",
+    dispatch({
+      type: "todoAdd",
+      payload: {
+        title,
+        currentGroup,
+      },
     });
-    setItems(newItems);
   }
 
   function editTodoCurry(todoId) {
-    return (val) => {
-      let newItems = { ...items };
-      newItems[currentGroup] = newItems[currentGroup].map((item) => {
-        if (item.id === todoId) {
-          item.title = val;
-        }
-        return item;
+    return (title) => {
+      dispatch({
+        type: "todoEdit",
+        payload: {
+          currentGroup,
+          todoId,
+          title,
+        },
       });
-      setItems(newItems);
     };
   }
 
