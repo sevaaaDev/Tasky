@@ -3,10 +3,10 @@ import { TodoItem } from "./components/TodoItem";
 import { TodoList } from "./components/TodoList";
 import { Form } from "./components/Form";
 import "./App.css";
+import { Modal } from "./components/Modal";
 import { GroupItem } from "./components/GroupItem";
 
 const initItems = {
-  Default: [],
   Programming: [
     {
       id: crypto.randomUUID(),
@@ -34,12 +34,24 @@ const initItems = {
     },
   ],
 };
+
+function getAllTodo(items) {
+  let arr = [];
+  for (let key of Object.keys(items)) {
+    arr = arr.concat(items[key]);
+  }
+  return arr;
+}
+
 function App() {
   const [items, setItems] = useState(initItems);
   const [currentGroup, setCurrentGroup] = useState("Programming"); // change it to default
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalBody, setModalBody] = useState(null);
-  let currentItems = items[currentGroup];
+  let currentItems = getAllTodo(state);
+  if (currentGroup !== "Default") {
+    currentItems = state[currentGroup];
+  }
   let listOfGroups = Object.keys(items);
 
   function deleteGroupCurry(id) {
@@ -127,6 +139,11 @@ function App() {
       </TodoList>
       <hr />
       <TodoList>
+        <GroupItem
+          groupName="Default"
+          setGroupCurry={changeGroupCurry}
+          isDefault={true}
+        />
         {listOfGroups.map((el) => (
           <GroupItem
             key={el}
