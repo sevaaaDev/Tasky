@@ -8,6 +8,7 @@ function GroupItem({
   setGroupCurry,
   showModal,
   closeModal,
+  isDefault,
 }) {
   function handleEdit(e) {
     e.stopPropagation();
@@ -23,8 +24,11 @@ function GroupItem({
 
   return (
     <li onClick={setGroupCurry(groupName)}>
-      {groupName} <button onClick={handleDeleteCurry(groupName)}>Delete</button>
-      <button onClick={handleEdit}>Edit</button>
+      {groupName}
+      {!isDefault && (
+        <button onClick={handleDeleteCurry(groupName)}>Delete</button>
+      )}
+      {!isDefault && <button onClick={handleEdit}>Edit</button>}
     </li>
   );
 }
