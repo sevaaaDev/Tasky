@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-function Form({ submit, initVal, closeModal }) {
+function Form({ submit, initVal = "", closeModal = () => {} }) {
   const [val, setVal] = useState(initVal);
 
   function handleSubmit(e) {
