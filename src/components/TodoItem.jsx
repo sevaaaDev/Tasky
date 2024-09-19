@@ -10,8 +10,6 @@ function TodoItem({
   showModal,
   closeModal,
 }) {
-  const [isEdit, setIsEdit] = useState(false);
-
   function handleEdit() {
     showModal(
       <Form
@@ -21,7 +19,6 @@ function TodoItem({
       />,
     );
   }
-  // BUG: form init val become "" when try to edit
   return (
     <li>
       {item.title} <button onClick={handleDeleteCurry(item.id)}>Delete</button>
