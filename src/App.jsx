@@ -37,6 +37,8 @@ const initItems = {
 function App() {
   const [items, setItems] = useState(initItems);
   const [currentGroup, setCurrentGroup] = useState("Programming"); // change it to default
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [modalBody, setModalBody] = useState(null);
   let currentItems = items[currentGroup];
   let listOfGroups = Object.keys(items);
 
@@ -69,17 +71,47 @@ function App() {
     setItems(newItems);
   }
 
-  function editTodoCurry(todoItem) {
-    return () => {};
+  function editTodoCurry(todoId) {
+    return (val) => {
+      let newItems = { ...items };
+      newItems[currentGroup] = newItems[currentGroup].map((item) => {
+        if (item.id === todoId) {
+          item.title = val;
+        }
+        return item;
+      });
+      setItems(newItems);
+    };
+  }
+
+  function editGroupCurry(groupName) {
+    return (newGroupName) => {
+      let { [groupName]: _, ...newItems } = items;
+      newItems[newGroupName] = [...items[groupName]];
+      setItems(newItems);
+    };
   }
 
   function changeGroupCurry(groupName) {
     return () => setCurrentGroup(groupName);
   }
+
+  function closeModal() {
+    setModalOpen(false);
+    setModalBody(null);
+  }
   // TODO: form modal
   // TODO: create List component
+
+  function showModal(element) {
+    setModalOpen(true);
+    setModalBody(element);
+  }
   return (
     <>
+      <Modal openModal={isModalOpen} handleModal={closeModal}>
+        {modalBody}
+      </Modal>
       <Form submit={addTodo} label="Todo"></Form>
       <TodoList>
         {currentItems.map((el) => (
@@ -88,6 +120,8 @@ function App() {
             item={el}
             handleDeleteCurry={deleteTodoCurry}
             handleEditCurry={editTodoCurry}
+            showModal={showModal}
+            closeModal={closeModal}
           />
         ))}
       </TodoList>
@@ -98,8 +132,10 @@ function App() {
             key={el}
             groupName={el}
             handleDeleteCurry={deleteGroupCurry}
-            handleEditCurry={() => {}}
+            handleEditCurry={editGroupCurry}
             setGroupCurry={changeGroupCurry}
+            showModal={showModal}
+            closeModal={closeModal}
           />
         ))}
       </TodoList>
