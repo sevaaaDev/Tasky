@@ -7,32 +7,33 @@ import { Modal } from "./components/Modal";
 import { GroupItem } from "./components/GroupItem";
 
 const initItems = {
-  Programming: [
+  todos: [
     {
       id: crypto.randomUUID(),
       title: "Learn React Hooks",
-
       summary: "all hooks",
+      group: "Programming",
     },
     {
       id: crypto.randomUUID(),
       title: "Learn React Router",
       summary: "router",
+      group: "Programming",
     },
-  ],
-  Life: [
     {
       id: crypto.randomUUID(),
       title: "Pull UP",
-
       summary: "yes",
+      group: "Life",
     },
     {
       id: crypto.randomUUID(),
       title: "Fix urself",
       summary: "frog",
+      group: "Life",
     },
   ],
+  groups: ["Programming", "Life"],
 };
 
 function getAllTodo(items) {
