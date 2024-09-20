@@ -5,6 +5,7 @@ import { Form } from "./components/Form";
 import "./App.css";
 import { Modal } from "./components/Modal";
 import { GroupItem } from "./components/GroupItem";
+import "./App.css";
 
 const initItems = {
   todos: [
@@ -36,13 +37,7 @@ const initItems = {
   groups: ["Programming", "Life"],
 };
 
-function getAllTodo(items) {
-  let arr = [];
-  for (let key of Object.keys(items)) {
-    arr = arr.concat(items[key]);
-  }
-  return arr;
-}
+// TODO: change state structure means change everything
 
 function reducer(state, action) {
   let { payload, type } = action;
@@ -50,64 +45,106 @@ function reducer(state, action) {
     case "todoAdd":
       return {
         ...state,
-        [payload.currentGroup]: state[payload.currentGroup].concat(
-          newTodo(payload.title),
-        ),
+        todos: todoAdd(state.todos, payload),
       };
     case "todoEdit":
-      return todoEdit(state, payload);
+      return {
+        ...state,
+        todos: todoEdit(state.todos, payload),
+      };
     case "todoDelete":
-      return todoDelete(state, payload);
+      return {
+        ...state,
+        todos: todoDelete(state.todos, payload),
+      };
+    case "groupDelete":
+      return groupDelete(state, payload);
+    case "groupEdit":
+      return groupEdit(state, payload);
     default:
       return state;
   }
 }
-function newTodo(title) {
-  return {
-    id: crypto.randomUUID(),
-    title: title,
-    summary: "",
-  };
+
+function groupDelete(state, { groupName }) {
+  let newState = { ...state };
+  newState.groups = newState.groups.filter((group) => group !== groupName);
+  newState.todos = todoDeleteByGroup(newState.todos, groupName);
+  return newState;
+}
+function todoDeleteByGroup(todos, groupName) {
+  return todos.filter((todo) => todo.group !== groupName);
 }
 
-function todoEdit(state, { todoId, title, currentGroup }) {
-  let newItems = { ...state };
-  newItems[currentGroup] = newItems[currentGroup].map((item) => {
+function groupEdit(state, { newGroupName, groupName }) {
+  let newState = { ...state };
+  newState.groups = newState.groups.map((group) => {
+    if (group === groupName) {
+      return newGroupName;
+    }
+    return group;
+  });
+  newState.todos = changeTodoGroup(newState.todos, { newGroupName, groupName });
+  return newState;
+}
+function changeTodoGroup(todos, { newGroupName, groupName }) {
+  return todos.map((todo) => {
+    if (todo.group === groupName) {
+      todo.group = newGroupName;
+    }
+    return todo;
+  });
+}
+
+function todoAdd(todos, { title, group }) {
+  return [
+    ...todos,
+    {
+      id: crypto.randomUUID(),
+      title: title,
+      summary: "",
+      group: group,
+    },
+  ];
+}
+
+function todoEdit(todos, { todoId, title }) {
+  return todos.map((item) => {
     if (item.id === todoId) {
       item.title = title;
     }
     return item;
   });
-  return newItems;
 }
 
-function todoDelete(state, { todoId, currentGroup }) {
-  // BUG: if delete on default group, it will error (bcs dont know which currentGroup)
-  let newItems = { ...state };
-  newItems[currentGroup] = newItems[currentGroup].filter(
-    (el) => el.id !== todoId,
-  );
-  return newItems;
+function todoDelete(todos, { todoId }) {
+  return todos.filter((el) => el.id !== todoId);
 }
-// TODO: learn about useReducer
+
 function App() {
   const [items, setItems] = useState(initItems);
-  const [currentGroup, setCurrentGroup] = useState("Programming"); // change it to default
+  const [currentGroup, setCurrentGroup] = useState("Default"); // change it to default
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalBody, setModalBody] = useState(null);
   const [state, dispatch] = useReducer(reducer, initItems);
-  let currentItems = getAllTodo(state);
+  let currentItems = [...state.todos];
   if (currentGroup !== "Default") {
-    currentItems = state[currentGroup];
+    currentItems = state.todos.filter((todo) => todo.group === currentGroup);
   }
-  let listOfGroups = Object.keys(items);
+  let listOfGroups = [...state.groups];
 
   function deleteGroupCurry(id) {
     return (e) => {
       e.stopPropagation();
-      let { [id]: _, ...newItems } = items;
-      setCurrentGroup("Default");
-      setItems(newItems);
+      dispatch({
+        type: "groupDelete",
+        payload: {
+          groupName: id,
+        },
+      });
+      if (currentGroup === id) {
+        setCurrentGroup("Default");
+      }
     };
   }
 
@@ -117,7 +154,6 @@ function App() {
         type: "todoDelete",
         payload: {
           todoId,
-          currentGroup,
         },
       });
     };
@@ -128,7 +164,7 @@ function App() {
       type: "todoAdd",
       payload: {
         title,
-        currentGroup,
+        group: currentGroup,
       },
     });
   }
@@ -138,7 +174,6 @@ function App() {
       dispatch({
         type: "todoEdit",
         payload: {
-          currentGroup,
           todoId,
           title,
         },
@@ -148,9 +183,16 @@ function App() {
 
   function editGroupCurry(groupName) {
     return (newGroupName) => {
-      let { [groupName]: _, ...newItems } = items;
-      newItems[newGroupName] = [...items[groupName]];
-      setItems(newItems);
+      dispatch({
+        type: "groupEdit",
+        payload: {
+          groupName,
+          newGroupName,
+        },
+      });
+      if (currentGroup === groupName) {
+        setCurrentGroup(newGroupName);
+      }
     };
   }
 
@@ -162,8 +204,6 @@ function App() {
     setModalOpen(false);
     setModalBody(null);
   }
-  // TODO: form modal
-  // TODO: create List component
 
   function showModal(element) {
     setModalOpen(true);
