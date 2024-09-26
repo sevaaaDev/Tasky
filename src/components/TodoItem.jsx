@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
-import { Modal } from "./Modal";
-import { Form } from "./Form";
+import { Button } from "./Button";
+import { TodoForm } from "./TodoFormModal";
 
 function TodoItem({
   item,
@@ -12,17 +11,23 @@ function TodoItem({
 }) {
   function handleEdit() {
     showModal(
-      <Form
+      <TodoForm
         submit={handleEditCurry(item.id)}
-        initVal={item.title}
+        defaultVal={{
+          title: item.title,
+          group: item.group,
+        }}
         closeModal={closeModal}
       />,
     );
   }
   return (
-    <li>
-      {item.title} <button onClick={handleDeleteCurry(item.id)}>Delete</button>
-      <button onClick={handleEdit}>Edit</button>
+    <li className="p-2 rounded bg-gray-200 mb-1 flex">
+      {item.title}
+      <Button className="ml-auto mr-1" onClick={handleEdit}>
+        Edit
+      </Button>
+      <Button onClick={handleDeleteCurry(item.id)}>Delete</Button>
     </li>
   );
 }

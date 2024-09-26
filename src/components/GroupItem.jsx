@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import { Form } from "./Form";
+import { GroupForm } from "./GroupForm";
+import { Button } from "./Button";
 
 function GroupItem({
   groupName,
@@ -12,23 +14,29 @@ function GroupItem({
 }) {
   function handleEdit(e) {
     e.stopPropagation();
-    // BUG: when editing current group, it will error bcs the group disappear/changed (like deleting group)
     showModal(
-      <Form
+      <GroupForm
+        defaultVal={{ group: groupName }}
         submit={handleEditCurry(groupName)}
-        initVal={groupName}
         closeModal={closeModal}
       />,
     );
   }
 
   return (
-    <li onClick={setGroupCurry(groupName)}>
+    <li
+      onClick={setGroupCurry(groupName)}
+      className="p-2 bg-gray-200 mb-1 flex"
+    >
       {groupName}
       {!isDefault && (
-        <button onClick={handleDeleteCurry(groupName)}>Delete</button>
+        <Button className="ml-auto mr-1" onClick={handleEdit}>
+          Edit
+        </Button>
       )}
-      {!isDefault && <button onClick={handleEdit}>Edit</button>}
+      {!isDefault && (
+        <Button onClick={handleDeleteCurry(groupName)}>Delete</Button>
+      )}
     </li>
   );
 }
