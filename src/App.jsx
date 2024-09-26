@@ -10,41 +10,38 @@ import { TodoForm } from "./components/TodoFormModal";
 import { Button } from "./components/Button";
 import reducer from "./reducer";
 
-// TODO: put the logic on separate component
 // rethink everything
 const initItems = {
   todos: [
     {
       id: crypto.randomUUID(),
       title: "Learn React Hooks",
-      summary: "all hooks",
+      priority: "1",
       group: "Programming",
     },
     {
       id: crypto.randomUUID(),
       title: "Learn React Router",
-      summary: "router",
+      priority: "2",
       group: "Programming",
     },
     {
       id: crypto.randomUUID(),
       title: "Pull UP",
-      summary: "yes",
+      priority: "3",
       group: "Life",
     },
     {
       id: crypto.randomUUID(),
       title: "Fix urself",
-      summary: "frog",
+      priority: "3",
       group: "Life",
     },
   ],
   groups: ["Programming", "Life"],
 };
 
-// TODO: create add todo form
 // TODO: create add group form
-// TODO: rethink modal
 
 function App() {
   const [currentGroup, setCurrentGroup] = useState("Default"); // change it to default
@@ -55,15 +52,8 @@ function App() {
   if (currentGroup !== "Default") {
     currentItems = state.todos.filter((todo) => todo.group === currentGroup);
   }
-  function addTodo({ title, group }) {
-    dispatch({
-      type: "todoAdd",
-      payload: {
-        title,
-        group,
-      },
-    });
-  }
+  //currentItems.sort((a, b) => Number(b.priority) - Number(a.priority));
+  currentItems.sort((a, b) => (a.title > b.title ? 1 : -1));
   function changeGroupCurry(groupName) {
     return () => setCurrentGroup(groupName);
   }
@@ -97,13 +87,6 @@ function App() {
         showModal={showModal}
         closeModal={closeModal}
       />
-      <Button
-        onClick={() =>
-          showModal(<TodoForm submit={addTodo} closeModal={closeModal} />)
-        }
-      >
-        Add TODO
-      </Button>
     </div>
   );
 }

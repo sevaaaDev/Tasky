@@ -13,14 +13,19 @@ function Modal({ children, openModal, handleModal }) {
 
   return (
     <dialog
-      className="border border-black rounded p-4"
+      className="border border-black rounded p-2"
       ref={modal}
       onCancel={() => handleModal(0)}
     >
+      <div className="flex justify-end mb-2">
+        <Button
+          className="font-bold bg-inherit text-black out"
+          onClick={() => handleModal(0)}
+        >
+          X
+        </Button>
+      </div>
       {children}
-      <Button className="mt-4" onClick={() => handleModal(0)}>
-        Close
-      </Button>
     </dialog>
   );
 }
