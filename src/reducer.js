@@ -55,14 +55,17 @@ function changeTodoGroup(todos, { newGroupName, groupName }) {
   });
 }
 
-function todoAdd(todos, { title, group }) {
+function todoAdd(todos, { title, group, priority, done, dueDate }) {
   return [
     ...todos,
     {
       id: crypto.randomUUID(),
-      title: title,
-      summary: "",
-      group: group,
+      title,
+      description: "",
+      priority,
+      done,
+      dueDate,
+      group,
     },
   ];
 }
